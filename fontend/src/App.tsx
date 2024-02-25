@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/pages";
 import "./App.css";
@@ -7,13 +5,15 @@ import "./App.css";
 function App() {
   return (
     <div id="app">
-      <BrowserRouter>
-        <Routes><label htmlFor=""></label>
-          <Route path="/" element={<HomePage />}>
-            {" "}
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<HomePage />}>
+              {" "}
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      
     </div>
   );
 

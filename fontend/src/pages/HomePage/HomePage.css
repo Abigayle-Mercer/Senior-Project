@@ -1,0 +1,30 @@
+.home {
+}
+.title {
+    font-size: 35px;
+}
+.options {
+  padding: 2rem 2rem;
+
+
+.button-wrapper {
+  display: inline-block;
+  padding: 1rem 1rem;
+}
+
+.button {
+
+  padding: 12px 32px;
+  border-radius: 15px;
+  color: white;
+  background-color: #7fb1cc;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+  align-self: center;
+  border: none;
+}
+
+.button:hover {
+  background-color: #b7cad4;
+}
