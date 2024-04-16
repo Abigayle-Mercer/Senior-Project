@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  createTecher,
+  createTeacher,
   getTeacher,
   getTeachers,
   deleteTeacher,

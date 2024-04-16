@@ -53,7 +53,7 @@ const deleteTeacher = async (req, res) => {
 
 // update a teacher
 
-const updateTecher = async (req, res) => {
+const updateTeacher = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such teacher" });

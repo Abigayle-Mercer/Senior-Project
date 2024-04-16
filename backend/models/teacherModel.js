@@ -1,4 +1,4 @@
-const { interpolate } = require("d3");
+
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;

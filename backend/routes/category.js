@@ -2,7 +2,7 @@ const express = require("express");
 const {
   createCategory,
   getCategory,
-  getCategory,
+  getCategories,
   deleteCategory,
   updateCategory,
 } = require("../controllers/categoryController");

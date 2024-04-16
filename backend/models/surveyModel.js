@@ -1,4 +1,3 @@
-const { interpolate } = require('d3')
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
@@ -9,7 +8,7 @@ const surveySchema = new Schema({
         required: true
     },
     authorId: {
-        type: int, 
+        type: String, 
     }
 
 }, { timestamps: true })
