@@ -1,7 +1,7 @@
 const express = require("express");
 const {
   createReflection,
-  getReflection,
+  getReflections,
   getReflection,
   deleteReflection,
   updateReflection,

@@ -1,15 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
-function TeacherLogin() {
+function LoginPage() {
   const [isSignUp, setSignUp] = useState(false);
   const [name, setName] = useState("");
   const [district, setDistrict] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const navigate = useNavigate();
+  const navigateToLogin = () => {
+    navigate("/DashBoard");
+  };
+
   const handleLogin = () => {
     // Implement your login logic here
+    console.log("HELLO")
     console.log("Logging in with:", email, district, password);
+    navigateToLogin();
   };
 
   const handleSignUp = () => {
@@ -106,4 +115,4 @@ function TeacherLogin() {
   return isSignUp ? <SignUp /> : <Login />;
 }
 
-export default TeacherLogin;
+export default LoginPage;

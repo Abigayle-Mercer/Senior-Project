@@ -1,4 +1,3 @@
-const { interpolate } = require("d3");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -6,13 +5,13 @@ const Schema = mongoose.Schema;
 const responseSchema = new Schema(
   {
     studentId: {
-      type: int,
+      type: String,
     },
     date: {
-      type: date,
+      type: Date,
     },
     surveyId: {
-      type: int,
+      type: String,
     },
   },
   { timestamps: true }

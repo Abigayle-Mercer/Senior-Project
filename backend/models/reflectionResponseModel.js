@@ -1,4 +1,3 @@
-const { interpolate } = require("d3");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -6,10 +5,10 @@ const Schema = mongoose.Schema;
 const reflectionResponseSchema = new Schema(
   {
     reflectionId: {
-      type: int,
+      type: String,
     },
     responseId: {
-      type: int,
+      type: String,
     },
     input: {
       type: String,

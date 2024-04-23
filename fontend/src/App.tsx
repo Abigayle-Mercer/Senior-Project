@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, TeacherLogin, StudentLogin } from "./pages/pages";
+import { HomePage, LoginPage, DashBoard, LoginTest } from "./pages/pages";
+
 import "./App.css";
 
 function App() {
@@ -10,12 +11,13 @@ function App() {
           <Route path="/" element={<HomePage />}>
             {" "}
           </Route>
-          <Route path="/Teacher-Login" element={<TeacherLogin />}>
+          <Route path="/Login-Page" element={<LoginPage />}>
             {" "}
           </Route>
-          <Route path="/Student-Login" element={<StudentLogin />}>
+          <Route path="/DashBoard" element={<DashBoard />}>
             {" "}
           </Route>
+          
         </Routes>
       </BrowserRouter>
     </div>

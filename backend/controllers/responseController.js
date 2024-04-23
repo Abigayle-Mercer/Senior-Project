@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const getResponses = async (req, res) => {
   const responses = await Response.find({}).sort({ createdAt: -1 });
 
-  res.status(200).json(rResponses);
+  res.status(200).json(responses);
 };
 
 // get a single responses

@@ -1,4 +1,3 @@
-const { interpolate } = require("d3");
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
@@ -6,13 +5,13 @@ const Schema = mongoose.Schema;
 const promptResponseSchema = new Schema(
   {
     responseId: {
-      type: int,
+      type: String,
     },
     promptId: {
-      type: int,
+      type: String,
     },
     value: {
-        type: int,
+        type: Number,
     }
   },
   { timestamps: true }
