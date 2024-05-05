@@ -1,12 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import  {
   createTeacher,
   getTeacher,
   getTeachers,
   deleteTeacher,
   updateTeacher,
-} = require("../controllers/teacherController");
+} from "../controllers/teacherController.js";
+import { authenticateUser } from "../auth.js";
 const router = express.Router();
+router.use(authenticateUser);
 
 // get all teachers
 router.get("/", getTeachers);
@@ -22,4 +24,4 @@ router.delete("/:id", deleteTeacher);
 // UPDATE a teacher
 router.patch("/:id", updateTeacher);
 
-module.exports = router;
+export { router as teacherRoutes }; // Export surveyRoutes

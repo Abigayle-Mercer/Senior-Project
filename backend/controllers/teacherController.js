@@ -1,15 +1,15 @@
-const Teacher = require("../models/teacherModel");
-const mongoose = require("mongoose");
+import Teacher from "../models/teacherModel.js";
+import mongoose from "mongoose";
 
 // get all teachers
-const getTeachers = async (req, res) => {
+export const getTeachers = async (req, res) => {
   const teachers = await Teacher.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(teachers);
 };
 
 // get a single teacher
-const getTeacher = async (req, res) => {
+export const getTeacher = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +24,7 @@ const getTeacher = async (req, res) => {
   res.status(200).json(teacher);
 };
 // create new teacher
-const createTeacher = async (req, res) => {
+export const createTeacher = async (req, res) => {
   const { name, email, password, district } = req.body;
   // add doc to db
   try {
@@ -37,7 +37,7 @@ const createTeacher = async (req, res) => {
 
 // delete a teacher
 
-const deleteTeacher = async (req, res) => {
+export const deleteTeacher = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such teacher" });
@@ -53,7 +53,7 @@ const deleteTeacher = async (req, res) => {
 
 // update a teacher
 
-const updateTeacher = async (req, res) => {
+export const updateTeacher = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such teacher" });
@@ -73,10 +73,4 @@ const updateTeacher = async (req, res) => {
 };
 
 
-module.exports = {
-  createTeacher,
-  getTeachers,
-  getTeacher,
-  deleteTeacher,
-  updateTeacher,
-};
+

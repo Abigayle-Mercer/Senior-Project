@@ -1,7 +1,9 @@
-const express = require('express')
-const {createSurvey, getSurvey, getSurveys, deleteSurvey, updateSurvey} = require('../controllers/surveyController')
-const router = express.Router()
+import express from "express";
+import {createSurvey, getSurvey, getSurveys, deleteSurvey, updateSurvey} from "../controllers/surveyController.js";
+import { authenticateUser } from "../auth.js";
+const router = express.Router();
 
+router.use(authenticateUser);
 // get all surveys
 router.get('/', getSurveys)
 
@@ -17,6 +19,4 @@ router.delete('/:id', deleteSurvey)
 router.patch('/:id', updateSurvey)
 
 
-
-
-module.exports = router
+export { router as surveyRoutes }; // Export surveyRoutes

@@ -1,12 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createResponse,
   getResponses,
   getResponse,
   deleteResponse,
   updateResponse,
-} = require("../controllers/responseController");
+} from "../controllers/responseController.js";
+import { authenticateUser } from "../auth.js";
 const router = express.Router();
+router.use(authenticateUser);
 
 // get all Responses
 router.get("/", getResponses);
@@ -22,4 +24,5 @@ router.delete("/:id", deleteResponse);
 // UPDATE a response
 router.patch("/:id", updateResponse);
 
-module.exports = router;
+export { router as responseRoutes }; // Export surveyRoutes
+

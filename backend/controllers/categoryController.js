@@ -1,15 +1,15 @@
-const Category = require("../models/categoryModel");
-const mongoose = require("mongoose");
+import Category from "../models/categoryModel.js";
+import mongoose from "mongoose";
 
 // get all categorys
-const getCategories = async (req, res) => {
+export const getCategories = async (req, res) => {
   const categories = await Category.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(categories);
 };
 
 // get a single category
-const getCategory = async (req, res) => {
+export const getCategory = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +24,7 @@ const getCategory = async (req, res) => {
   res.status(200).json(category);
 };
 // create new category
-const createCategory = async (req, res) => {
+export const createCategory = async (req, res) => {
   const { title, surveyId } = req.body;
   // add doc to db
   try {
@@ -36,7 +36,7 @@ const createCategory = async (req, res) => {
 };
 
 // delete a category
-const deleteCategory = async (req, res) => {
+export const deleteCategory = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such category" });
@@ -52,7 +52,7 @@ const deleteCategory = async (req, res) => {
 
 // update a category
 
-const updateCategory = async (req, res) => {
+export const updateCategory = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such category" });
@@ -71,10 +71,4 @@ const updateCategory = async (req, res) => {
   res.status(200).json(category);
 };
 
-module.exports = {
-  createCategory,
-  getCategories,
-  getCategory,
-  deleteCategory,
-  updateCategory,
-};
+

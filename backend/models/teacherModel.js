@@ -1,5 +1,4 @@
-
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -13,10 +12,6 @@ const teacherSchema = new Schema(
       type: String,
       required: true,
     },
-    password: {
-      type: String,
-      required: true,
-    },
     district: {
       type: String,
       required: true,
@@ -25,4 +20,5 @@ const teacherSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Teacher", teacherSchema);
+
+export default mongoose.model("Teacher", teacherSchema);

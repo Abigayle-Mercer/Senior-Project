@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -17,4 +17,5 @@ const reflectionResponseSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("ReflectionResponse", reflectionResponseSchema);
+export default mongoose.model("ReflectionResponse", reflectionResponseSchema);
+

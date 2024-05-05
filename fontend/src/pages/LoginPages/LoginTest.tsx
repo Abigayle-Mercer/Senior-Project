@@ -1,8 +1,9 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   buttonLabel?: string;
-  handleSubmit: (creds: Credentials) => void;
+  handleSubmit: (creds: Credentials) => Promise<boolean>;
 }
 
 interface Credentials {
@@ -11,6 +12,7 @@ interface Credentials {
 }
 
 const Login: React.FC<Props> = (props) => {
+  const navigate = useNavigate();
   const [creds, setCreds] = useState<Credentials>({
     username: "",
     pwd: "",
@@ -25,7 +27,15 @@ const Login: React.FC<Props> = (props) => {
   };
 
   const submitForm = () => {
-    props.handleSubmit(creds);
+    props.handleSubmit(creds).then(
+      function retreiveSuccess(bool: boolean) {
+          if (bool) {
+            navigate("/DashBoard");
+          }
+      }
+      // navigate(/dashboard )
+    )
+
     setCreds({ username: "", pwd: "" });
   };
 
@@ -41,9 +51,9 @@ const Login: React.FC<Props> = (props) => {
       />
       <label htmlFor="password">Password</label>
       <input
-        type="password"
-        name="password"
-        id="password"
+         type="password" 
+        name="pwd"
+        id="pwd"
         value={creds.pwd}
         onChange={handleChange}
       />

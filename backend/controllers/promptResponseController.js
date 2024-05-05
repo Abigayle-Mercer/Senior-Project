@@ -1,15 +1,15 @@
-const PromptResponse = require("../models/promptResponseModel");
-const mongoose = require("mongoose");
+import PromptResponse from "../models/promptResponseModel.js";
+import mongoose from "mongoose";
 
 // get all Prompts
-const getPromptResponses = async (req, res) => {
+export const getPromptResponses = async (req, res) => {
   const promptResponses = await PromptResponse.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(promptResponses);
 };
 
 // get a single prompt
-const getPromptResponse = async (req, res) => {
+export const getPromptResponse = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +24,7 @@ const getPromptResponse = async (req, res) => {
   res.status(200).json(promptResponse);
 };
 // create new prompt
-const createPromptResponse = async (req, res) => {
+export const createPromptResponse = async (req, res) => {
   const { responseId, promptId, value } = req.body;
   // add doc to db
   try {
@@ -37,7 +37,7 @@ const createPromptResponse = async (req, res) => {
 
 // delete a prompt
 
-const deletePromptResponse = async (req, res) => {
+export const deletePromptResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such prompt response" });
@@ -53,7 +53,7 @@ const deletePromptResponse = async (req, res) => {
 
 // update a prompt response
 
-const updatePromptResponse = async (req, res) => {
+export const updatePromptResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such prompt response" });
@@ -72,10 +72,3 @@ const updatePromptResponse = async (req, res) => {
   res.status(200).json(promptResponse);
 };
 
-module.exports = {
-  createPromptResponse,
-  getPromptResponses,
-  getPromptResponse,
-  deletePromptResponse,
-  updatePromptResponse,
-};

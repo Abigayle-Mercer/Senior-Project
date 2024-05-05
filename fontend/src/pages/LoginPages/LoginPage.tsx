@@ -1,118 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 
-function LoginPage() {
-  const [isSignUp, setSignUp] = useState(false);
-  const [name, setName] = useState("");
-  const [district, setDistrict] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+interface Props {
+  buttonLabel?: string;
+  handleSubmit: (creds: Credentials) => Promise<boolean>;
+}
 
+interface Credentials {
+  username: string;
+  pwd: string;
+}
+
+const LoginPage: React.FC<Props> = (props) => {
   const navigate = useNavigate();
-  const navigateToLogin = () => {
-    navigate("/DashBoard");
+
+  const [creds, setCreds] = useState<Credentials>({
+    username: "",
+    pwd: "",
+  });
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setCreds((prevCreds) => ({
+      ...prevCreds,
+      [name]: value,
+    }));
   };
 
-  const handleLogin = () => {
-    // Implement your login logic here
-    console.log("HELLO")
-    console.log("Logging in with:", email, district, password);
-    navigateToLogin();
-  };
 
-  const handleSignUp = () => {
-    setSignUp(false); // Switch to login form
+  const submitForm = () => {
+    props.handleSubmit(creds).then(
+      function retreiveSuccess(bool: boolean) {
+        if (bool) {
+          
+          navigate("/DashBoard");
+        }
+      }
+      // navigate(/dashboard )
+    );
+
+    setCreds({ username: "", pwd: "" });
   };
 
   const handleSwitchToSignUp = () => {
-    setSignUp(true); // Switch to sign-up form
+    navigate("/Signup-Page");
   };
-  
-    function SignUp() {
-      return (
-        <div className="login-container">
-          <h2>Teacher Sign Up</h2>
-          <form onSubmit={handleLogin}>
-            <div className="input-group">
-              <label>Name:</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </div>
-            <div className="input-group">
-                <label>School District:</label>
-                <input
-                  type="text"
-                  value={district}
-                  onChange={(e) => setDistrict(e.target.value)}
-                />
-            </div>
-            <div className="input-group">
-              <label>Username:</label>
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="input-group">
-              <label>Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button onClick={handleSignUp} type="submit" className="login-btn">
-              Sign Up
-            </button>
-            <span onClick={handleSignUp}> Already have an account? Login</span>
-          </form>
-        </div>
-      );
-    }
 
-
-
-    function Login() {
-      return (
-        <div className="login-container">
-          <h2>Teacher Log In</h2>
-          <form onSubmit={handleLogin}>
-            <div className="input-group">
-              <label>Username:</label>
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="input-group">
-              <label>Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button onClick={handleLogin} type="submit" className="login-btn">
-              Login
-            </button>
-            <span onClick={handleSwitchToSignUp}>
-              Don't have an account? Sign up
-            </span>
-          </form>
-        </div>
-      );
-    }
-
-
-  
-
-  return isSignUp ? <SignUp /> : <Login />;
-}
+    return (
+      <div className="login-container">
+        <h2>Teacher Log In</h2>
+        <form >
+          <div className="input-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value={creds.username}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="input-group">
+            <label>Password:</label>
+            <input
+              type="password"
+              name="pwd"
+              id="pwd"
+              value={creds.pwd}
+              onChange={handleChange}
+            />
+          </div>
+          <button onClick={submitForm} type="submit" className="login-btn">
+            Login
+          </button>
+          <span onClick={handleSwitchToSignUp}>
+            Don't have an account? Sign up
+          </span>
+        </form>
+      </div>
+    )
+};
 
 export default LoginPage;

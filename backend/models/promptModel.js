@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -15,4 +15,5 @@ const promptSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Prompt", promptSchema);
+export default mongoose.model("Prompt", promptSchema);
+

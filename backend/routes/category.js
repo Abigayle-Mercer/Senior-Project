@@ -1,12 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createCategory,
   getCategory,
   getCategories,
   deleteCategory,
   updateCategory,
-} = require("../controllers/categoryController");
+} from "../controllers/categoryController.js";
+import { authenticateUser } from "../auth.js";
 const router = express.Router();
+router.use(authenticateUser);
 
 // get all categories
 router.get("/", getCategories);
@@ -22,4 +24,4 @@ router.delete("/:id", deleteCategory);
 // UPDATE a category
 router.patch("/:id", updateCategory);
 
-module.exports = router;
+export { router as categoryRoutes }; // Export surveyRoutes

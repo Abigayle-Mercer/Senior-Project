@@ -1,15 +1,15 @@
-const Response = require("../models/responseModel");
-const mongoose = require("mongoose");
+import Response from "../models/responseModel.js";
+import mongoose from "mongoose";
 
 // get all responses
-const getResponses = async (req, res) => {
+export const getResponses = async (req, res) => {
   const responses = await Response.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(responses);
 };
 
 // get a single responses
-const getResponse = async (req, res) => {
+export const getResponse = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +24,7 @@ const getResponse = async (req, res) => {
   res.status(200).json(response);
 };
 // create new responses
-const createResponse = async (req, res) => {
+export const createResponse = async (req, res) => {
   const { studentId, date, surveyId } = req.body;
   // add doc to db
   try {
@@ -37,7 +37,7 @@ const createResponse = async (req, res) => {
 
 // delete a response
 
-const deleteResponse = async (req, res) => {
+export const deleteResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such response" });
@@ -53,7 +53,7 @@ const deleteResponse = async (req, res) => {
 
 // update a response
 
-const updateResponse = async (req, res) => {
+export const updateResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such response" });
@@ -72,10 +72,3 @@ const updateResponse = async (req, res) => {
   res.status(200).json(response);
 };
 
-module.exports = {
-  createResponse,
-  getResponses,
-  getResponse,
-  deleteResponse,
-  updateResponse,
-};

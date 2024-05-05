@@ -1,15 +1,15 @@
-const Student = require("../models/studentModel");
-const mongoose = require("mongoose");
+import Student from "../models/studentModel.js";
+import mongoose from "mongoose";
 
 // get all tudents
-const getStudents = async (req, res) => {
+export const getStudents = async (req, res) => {
   const students = await Student.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(students);
 };
 
 // get a single student
-const getStudent = async (req, res) => {
+export const getStudent = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +24,7 @@ const getStudent = async (req, res) => {
   res.status(200).json(student);
 };
 // create new student
-const createStudent = async (req, res) => {
+export const createStudent = async (req, res) => {
   const { name, email, password } = req.body;
   // add doc to db
   try {
@@ -37,7 +37,7 @@ const createStudent = async (req, res) => {
 
 // delete a student
 
-const deleteStudent = async (req, res) => {
+export const deleteStudent = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such student" });
@@ -53,7 +53,7 @@ const deleteStudent = async (req, res) => {
 
 // update a student
 
-const updateStudent = async (req, res) => {
+export const updateStudent = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such student" });
@@ -72,10 +72,4 @@ const updateStudent = async (req, res) => {
   res.status(200).json(student);
 };
 
-module.exports = {
-  createStudent,
-  getStudents,
-  getStudent,
-  deleteStudent,
-  updateStudent,
-};
+

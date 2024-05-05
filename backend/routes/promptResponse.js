@@ -1,12 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createPromptResponse,
   getPromptResponses,
   getPromptResponse,
   deletePromptResponse,
   updatePromptResponse,
-} = require("../controllers/promptResponseController");
+} from "../controllers/promptResponseController.js";
+import { authenticateUser } from "../auth.js";
 const router = express.Router();
+router.use(authenticateUser);
 
 // get all Prompts
 router.get("/", getPromptResponses);
@@ -22,4 +24,5 @@ router.delete("/:id", deletePromptResponse);
 // UPDATE a Prompt
 router.patch("/:id", updatePromptResponse);
 
-module.exports = router;
+export { router as promptResponseRoutes }; // Export surveyRoutes
+

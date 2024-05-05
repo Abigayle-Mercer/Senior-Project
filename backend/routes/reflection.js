@@ -1,12 +1,14 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createReflection,
   getReflections,
   getReflection,
   deleteReflection,
   updateReflection,
-} = require("../controllers/reflectionController");
+} from "../controllers/reflectionController.js";
+import { authenticateUser } from "../auth.js";
 const router = express.Router();
+router.use(authenticateUser);
 
 // get all reflections
 router.get("/", getReflections);
@@ -22,4 +24,5 @@ router.delete("/:id", deleteReflection);
 // UPDATE a reflection
 router.patch("/:id", updateReflection);
 
-module.exports = router;
+export { router as reflectionRoutes }; // Export surveyRoutes
+

@@ -1,0 +1,40 @@
+body {
+  background-color: #a0cc97; /* Use any shade of green you prefer */
+}
+
+.container {
+  display: flex;
+  height: 35vh; /* Set the height to half of the viewport height */
+}
+.container2 {
+    
+  display: flex;
+}
+.resource {
+  background-color: #f3f4f6;
+  width: 580px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  color: white;
+  width: 280px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}

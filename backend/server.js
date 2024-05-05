@@ -1,27 +1,41 @@
-require("dotenv").config();
-/* 
+
+import dotenv from "dotenv";
+import cors from "cors";
+dotenv.config();
+/*  
+  TODO: 
+    1.) change all of the requires 
+    2.) change the auth.js file 
+    3.) do user sign up 
+
     Questions: 
     1.) where do i add the authenticateUser function? 
     2.) which endpoints need it? Probably not students since they're recieving a secure email?
-    3.) Should teachers have usernames as well as emails?
+    3.) Should teachers have usernames as well as emails?  districts should be a drop down, with other, distrcits hvae to contact to be addd 
 
 */
-const express = require("express");
-const mongoose = require("mongoose");
-const surveyRoutes = require("./routes/surveys");
-const teacherRoutes = require("./routes/teacher");
-const categoryRoutes = require("./routes/category");
-const promptRoutes = require("./routes/prompt");
-const responseRoutes = require("./routes/response");
-const promptResponseRoutes = require("./routes/promptResponse");
-const reflectionRoutes = require("./routes/reflection");
-const reflectionResponseRoutes = require("./routes/reflectionResponse");
-const studentRoutes = require("./routes/student");
 
-import { registerUser, authenticateUser } from "./auth.js";
+
+import express from "express";
+import mongoose from "mongoose";
+import  {surveyRoutes}  from "./routes/surveys.js";
+
+
+import {teacherRoutes} from "./routes/teacher.js";
+import {categoryRoutes} from "./routes/category.js";
+import {promptRoutes} from "./routes/prompt.js";
+import {responseRoutes} from "./routes/response.js";
+import {promptResponseRoutes} from "./routes/promptResponse.js";
+import {reflectionRoutes} from "./routes/reflection.js";
+import {reflectionResponseRoutes} from "./routes/reflectionResponse.js";
+import {studentRoutes} from "./routes/student.js";
+
+import { registerUser, loginUser } from "./auth.js";
 
 // express app
+
 const app = express();
+app.use(cors())
 
 // middle ware
 app.use(express.json());
@@ -42,9 +56,10 @@ app.use("/api/reflectionResponses", reflectionResponseRoutes);
 app.use("/api/students", studentRoutes);
 // authentication
 app.post("/signup", registerUser); 
-app.post("/login", registerUser);
+app.post("/login", loginUser);
 
 // connect to DB
+console.log("HELLO")
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {

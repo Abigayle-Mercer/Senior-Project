@@ -1,15 +1,14 @@
-const Survey = require("../models/surveyModel");
-const mongoose = require("mongoose");
-
+import Survey from "../models/surveyModel.js";
+import mongoose from "mongoose";
 // get all surveys
-const getSurveys = async (req, res) => {
+export const getSurveys = async (req, res) => {
   const surveys = await Survey.find({}).sort({ createdAt: -1 });
 
   res.status(200).json(surveys);
 };
 
 // get a single survey
-const getSurvey = async (req, res) => {
+export const getSurvey = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -24,7 +23,7 @@ const getSurvey = async (req, res) => {
   res.status(200).json(survey);
 };
 // create new survey
-const createSurvey = async (req, res) => {
+export const createSurvey = async (req, res) => {
   const { title, authorId } = req.body;
   // add doc to db
   try {
@@ -37,7 +36,7 @@ const createSurvey = async (req, res) => {
 
 // delete a survey
 
-const deleteSurvey = async (req, res) => {
+export const deleteSurvey = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such survey" });
@@ -53,7 +52,7 @@ const deleteSurvey = async (req, res) => {
 
 // update a survey
 
-const updateSurvey = async (req, res) => {
+export const updateSurvey = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such survey" });
@@ -72,10 +71,4 @@ const updateSurvey = async (req, res) => {
   res.status(200).json(survey);
 };
 
-module.exports = {
-  createSurvey,
-  getSurveys,
-  getSurvey,
-  deleteSurvey,
-  updateSurvey,
-};
+

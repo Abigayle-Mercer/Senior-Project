@@ -1,8 +1,8 @@
-const ReflectionResponse = require("../models/reflectionResponseModel");
-const mongoose = require("mongoose");
+import ReflectionResponse from "../models/reflectionResponseModel.js";
+import mongoose from "mongoose";
 
 // get all Reflection Responses
-const getReflectionResponses = async (req, res) => {
+export const getReflectionResponses = async (req, res) => {
   const reflectionResponses = await ReflectionResponse.find({}).sort({
     createdAt: -1,
   });
@@ -11,7 +11,7 @@ const getReflectionResponses = async (req, res) => {
 };
 
 // get a single reflection response
-const getReflectionResponse = async (req, res) => {
+export const getReflectionResponse = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -26,7 +26,7 @@ const getReflectionResponse = async (req, res) => {
   res.status(200).json(reflectionResponse);
 };
 // create new reflection response
-const createReflectionResponse = async (req, res) => {
+export const createReflectionResponse = async (req, res) => {
   const { reflectionId, responseId, input } = req.body;
   // add doc to db
   try {
@@ -43,7 +43,7 @@ const createReflectionResponse = async (req, res) => {
 
 // delete a reflection response
 
-const deleteReflectionResponse = async (req, res) => {
+export const deleteReflectionResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such reflection response" });
@@ -61,7 +61,7 @@ const deleteReflectionResponse = async (req, res) => {
 
 // update a reflection response
 
-const updateReflectionResponse = async (req, res) => {
+export const updateReflectionResponse = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "No such reflection response" });
@@ -80,10 +80,4 @@ const updateReflectionResponse = async (req, res) => {
   res.status(200).json(reflectionResponse);
 };
 
-module.exports = {
-  createReflectionResponse,
-  getReflectionResponses,
-  getReflectionResponse,
-  deleteReflectionResponse,
-  updateReflectionResponse,
-};
+
