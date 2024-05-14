@@ -21,48 +21,52 @@ function generateAccessToken(username) {
 });
 }
 
-export function registerUser(req, res) {
+export async function registerUser(req, res) {
   const { username, pwd } = req.body; // from form
-  if (!username || !pwd) {res.status(400).send("Bad request: Invalid input data.");
-  } else if (credentialModel.find((c) => c.username === username)) {
-    res.status(409).send("Username already taken");
-  } else {
-    bcrypt
-      .genSalt(10)
-      .then((salt) => bcrypt.hash(pwd, salt))
-      .then((hashedPassword) => {
-        generateAccessToken(username).then((token) => {
-          console.log("Token:", token);
-          res.status(201).send({ token: token });
-          credentialModel.push({ username, hashedPassword });
-          });
-      });
+  try {
+    if (!username || !pwd) {
+      res.status(400).send("Bad request: Invalid input data.");
+    } else {
+      const existingUser = await credentialModel.findOne({ username });
+      if (existingUser) {
+        res.status(409).send("Username already taken");
+      } else {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(pwd, salt);
+        const token = await generateAccessToken(username);
+        console.log("Token:", token);
+        const newUser = await credentialModel.create({
+          username,
+          hashedPassword,
+        });
+        res.status(201).send({ token: token });
+  
+      }
     }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal server error");
   }
+}
 
-
-export function loginUser(req, res) {
+export async function loginUser(req, res) {
   const { username, pwd } = req.body; // from form
-  const retrievedUser = credentialModel.find((c) => c.username === username);
-  if (!retrievedUser) {
-    // invalid username
-    res.status(401).send("Unauthorized");
-  } else {
-    bcrypt
-      .compare(pwd, retrievedUser.hashedPassword)
-      .then((matched) => {
-        if (matched) {
-          generateAccessToken(username).then((token) => {
-            res.status(200).send({ token: token });
-          });
-        } else {
-          // invalid password
-          res.status(401).send("Unauthorized");
-        }
-      })
-      .catch(() => {
+  try {
+    const retrievedUser = await credentialModel.findOne({ username });
+    if (!retrievedUser) {
+      res.status(401).send("Unauthorized");
+    } else {
+      const matched = await bcrypt.compare(pwd, retrievedUser.hashedPassword);
+      if (matched) {
+        const token = await generateAccessToken(username);
+        res.status(200).send({ token: token });
+      } else {
         res.status(401).send("Unauthorized");
-      });
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal server error");
   }
 }
 

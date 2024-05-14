@@ -1,7 +1,5 @@
 import React, { useState, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../components/useAuth/useAuth";
-
 import "./login.css";
 
 interface Props {
@@ -13,11 +11,14 @@ interface Credentials {
   username: string;
   pwd: string;
 }
+const SignupPage: React.FC<Props> = (props) => {
+  const [name, setName] = useState("");
+  const [district, setDistrict] = useState("");
 
-const LoginPage: React.FC<Props> = (props) => {
   const navigate = useNavigate();
-  const { login } = useAuth();
-
+  const navigateToLogin = () => {
+    navigate("/Login-Page");
+  };
 
   const [creds, setCreds] = useState<Credentials>({
     username: "",
@@ -36,7 +37,7 @@ const LoginPage: React.FC<Props> = (props) => {
     props.handleSubmit(creds).then(
       function retreiveSuccess(bool: boolean) {
         if (bool) {
-          navigate("/DashBoard");
+          navigate("/Login-Page");
         }
       }
       // navigate(/dashboard )
@@ -45,14 +46,27 @@ const LoginPage: React.FC<Props> = (props) => {
     setCreds({ username: "", pwd: "" });
   };
 
-  const handleSwitchToSignUp = () => {
-    navigate("/Signup-Page");
-  };
 
   return (
     <div className="login-container">
-      <h2>Teacher Log In</h2>
+      <h2>Teacher Sign Up</h2>
       <form>
+        <div className="input-group">
+          <label>Name:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="input-group">
+          <label>School District:</label>
+          <input
+            type="text"
+            value={district}
+            onChange={(e) => setDistrict(e.target.value)}
+          />
+        </div>
         <div className="input-group">
           <label>Username:</label>
           <input
@@ -74,14 +88,12 @@ const LoginPage: React.FC<Props> = (props) => {
           />
         </div>
         <button onClick={submitForm} type="button" className="login-btn">
-          Login
+          Sign Up
         </button>
-        <span onClick={handleSwitchToSignUp}>
-          Don't have an account? Sign up
-        </span>
+        <span onClick={navigateToLogin}> Already have an account? Login</span>
       </form>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;
