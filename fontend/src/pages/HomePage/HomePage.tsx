@@ -1,5 +1,6 @@
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../components/useAuth/useAuth";
 
 
 
@@ -8,6 +9,11 @@ function HomePage() {
      const navigateToLogin = () => {
        navigate("/Login-Page");
      };
+
+    //const { logout } = useAuth();
+    //logout();
+
+
   
     
   return (

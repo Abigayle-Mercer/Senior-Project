@@ -11,10 +11,18 @@ const studentSchema = new Schema(
     email: {
       type: String,
       required: true,
+      unique: true, // Ensures no duplicate emails
     },
     password: {
       type: String,
       required: true,
+    },
+    verificationToken: {
+      type: String,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

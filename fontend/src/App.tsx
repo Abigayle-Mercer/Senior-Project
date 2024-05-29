@@ -1,6 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage, LoginPage, SignupPage, DashBoard, LoginTest, PreviousResponses, MakeSurveys, StatsPage, FindSurveys } from "./pages/pages";
 import React, { useState } from "react";
+import { AuthProvider } from "./components/useAuth/useAuth";
+import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+
+
 import "../defined.js";
 
 import "./App.css";
@@ -88,41 +92,56 @@ function App() {
   return (
     <div id="app">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />}>
-            {" "}
-          </Route>
-          <Route
-            path="/Login-Page"
-            element={<LoginPage handleSubmit={loginUser} />}
-          >
-            {" "}
-          </Route>
-          <Route path="/Signup-Page" element={<SignupPage handleSubmit={signupUser}/>}>
-            {" "}
-          </Route>
-          <Route path="/DashBoard" element={<DashBoard />}>
-            {" "}
-          </Route>
-          <Route
-            path="/Login-Test"
-            element={<LoginTest handleSubmit={loginUser} />}
-          >
-            {" "}
-          </Route>
-          <Route path="/Stats-Page" element={<StatsPage />}>
-            {" "}
-          </Route>
-          <Route path="/MakeSurveys-Page" element={<MakeSurveys />}>
-            {" "}
-          </Route>
-          <Route path="/FindSurveys-Page" element={<FindSurveys />}>
-            {" "}
-          </Route>
-          <Route path="/PreviousResponses-Page" element={<PreviousResponses />}>
-            {" "}
-          </Route>
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />}>
+              {" "}
+            </Route>
+            <Route
+              path="/Login-Page"
+              element={<LoginPage handleSubmit={loginUser} />}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/Signup-Page"
+              element={<SignupPage handleSubmit={signupUser} />}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/DashBoard"
+              element={
+                <ProtectedRoute>
+                  <DashBoard />
+                </ProtectedRoute>
+              }
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/Login-Test"
+              element={<LoginTest handleSubmit={loginUser} />}
+            >
+              {" "}
+            </Route>
+            <Route path="/Stats-Page" element={<StatsPage />}>
+              {" "}
+            </Route>
+            <Route path="/MakeSurveys-Page" element={<MakeSurveys />}>
+              {" "}
+            </Route>
+            <Route path="/FindSurveys-Page" element={<FindSurveys />}>
+              {" "}
+            </Route>
+            <Route
+              path="/PreviousResponses-Page"
+              element={<PreviousResponses />}
+            >
+              {" "}
+            </Route>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

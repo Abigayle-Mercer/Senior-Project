@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { verify, checkExists, create } from "./controllers/credentialsController.js";
 import credentialModel from "./models/credentialsModel.js";
 
-
+// jwt-decode runs on either front or backend, takes a token, and returns the plain text json obejfct 
 function generateAccessToken(username) {
   return new Promise((resolve, reject) => {
     jwt.sign(

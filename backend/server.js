@@ -30,7 +30,13 @@ import {reflectionRoutes} from "./routes/reflection.js";
 import {reflectionResponseRoutes} from "./routes/reflectionResponse.js";
 import {studentRoutes} from "./routes/student.js";
 
-import { registerUser, loginUser } from "./auth.js";
+import authRoutes, {
+  registerStudent,
+  registerTeacher,
+  loginUser,
+  verifyEmail,
+} from "./auth.js";
+
 
 // express app
 
@@ -54,9 +60,12 @@ app.use("/api/promptResponses", promptResponseRoutes);
 app.use("/api/reflections", reflectionRoutes);
 app.use("/api/reflectionResponses", reflectionResponseRoutes);
 app.use("/api/students", studentRoutes);
-// authentication
-app.post("/signup", registerUser); 
+
+// Authentication
+app.post("/signup/student", registerStudent); 
+app.post("/signup/teacher", registerTeacher); 
 app.post("/login", loginUser);
+app.get("/verify/:token", verifyEmail);
 
 // connect to DB
 console.log("HELLO")

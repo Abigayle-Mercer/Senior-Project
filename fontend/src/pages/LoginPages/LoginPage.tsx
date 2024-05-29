@@ -34,9 +34,11 @@ const LoginPage: React.FC<Props> = (props) => {
 
   const submitForm = () => {
     props.handleSubmit(creds).then(
-      function retreiveSuccess(bool: boolean) {
+      async function retreiveSuccess(bool: boolean) {
         if (bool) {
           navigate("/DashBoard");
+          const email = creds.username;
+          await login({ email });
         }
       }
       // navigate(/dashboard )

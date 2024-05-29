@@ -15,7 +15,14 @@ const teacherSchema = new Schema(
     district: {
       type: String,
       required: true,
-    }
+    },
+    verificationToken: {
+      type: String,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -8,9 +8,10 @@ interface Props {
 
 export const ProtectedRoute: React.FC<Props> = ({ children }) => {
   const { user } = useAuth();
+  console.log(user)
   if (!user) {
     // user is not authenticated
-    return <Navigate to="/login" />;
+    return <Navigate to="/Login-Page" />;
   }
   return <>{children}</>;
 };
