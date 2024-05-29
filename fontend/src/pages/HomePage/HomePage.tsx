@@ -6,8 +6,11 @@ import { useAuth } from "../../components/useAuth/useAuth";
 
 function HomePage() {
      const navigate = useNavigate();
-     const navigateToLogin = () => {
-       navigate("/Login-Page");
+     const navigateToTeacherLogin = () => {
+       navigate("/Teacher-Login");
+     };
+     const navigateToStudentLogin = () => {
+       navigate("/Student-Login");
      };
 
     //const { logout } = useAuth();
@@ -22,10 +25,18 @@ function HomePage() {
       <div className="options">
         <div className="button-wrapper">
           <input
-            onClick={navigateToLogin}
+            onClick={navigateToTeacherLogin}
             className="button"
             type="submit"
             value="I am a Teacher!"
+          />
+        </div>
+        <div className="button-wrapper">
+          <input
+            onClick={navigateToStudentLogin}
+            className="button"
+            type="submit"
+            value="I am a Student!"
           />
         </div>
       </div>

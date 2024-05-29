@@ -21,10 +21,11 @@ function App() {
 
 
 
-  interface Credentials {
-    username: string;
-    pwd: string;
-  }
+interface Credentials {
+  username: string;
+  pwd: string;
+  isTeacher?: boolean; // Flag to differentiate between student and teacher
+}
 
 
   /*
@@ -37,57 +38,64 @@ function App() {
   });
   */
 
-  async function loginUser(creds: Credentials): Promise<boolean> {
-    try {
-      const response = await fetch(`${API_PREFIX}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(creds),
-      });
+ async function loginUser(creds: Credentials): Promise<boolean> {
+   try {
+     const response = await fetch(`${API_PREFIX}/login`, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(creds),
+     });
 
-      if (response.status === 200) {
-        const payload = await response.json();
-        setToken(payload.token); // make these states
-        setMessage(`Login successful; auth token saved`); // make these states
-        return true;
-      } else {
-        const data = await response.json();
-        setMessage(`Login Error ${response.status}: ${data}`);
-        return false
-      }
-    } catch (error) {
-      setMessage(`Login Error: ${error}`);
-      return false
-    }
-  }
+     if (response.status === 200) {
+       const payload = await response.json();
+       setToken(payload.token);
+       setMessage("Login successful; auth token saved");
+       return true;
+     } else {
+       const data = await response.json();
+       setMessage(`Login Error ${response.status}: ${data}`);
+       return false;
+     }
+   } catch (error) {
+     setMessage(`Login Error: ${error}`);
+     return false;
+   }
+ }
 
-  async function signupUser(creds: Credentials): Promise<boolean> {
-    try {
-    const response = await fetch(`${API_PREFIX}/signup`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(creds),
-    });
-        if (response.status === 201) {
-          response.json().then((payload) => setToken(payload.token));
-          setMessage(
-            `Signup successful for user: ${creds.username}; auth token saved`
-          );
-          return true;
-        } else {
-          const data = await response.json();
-          setMessage(`Signup Error ${response.status}: ${data}`);
-          return false
-        }
-    } catch(error) {
-        setMessage(`Signup Error: ${error}`);
-        return false
-      }
-  }
+ async function signupUser(creds: Credentials): Promise<boolean> {
+   try {
+     const endpoint = creds.isTeacher
+       ? `${API_PREFIX}/signup/teacher`
+       : `${API_PREFIX}/signup/student`;
+     const response = await fetch(endpoint, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(creds),
+     });
+
+     if (response.status === 201) {
+       const payload = await response.json();
+       setToken(payload.token);
+       setMessage(
+         `Signup successful for user: ${creds.username}; auth token saved`
+       );
+       return true;
+     } else {
+       const data = await response.json();
+       setMessage(`Signup Error ${response.status}: ${data}`);
+       return false;
+     }
+   } catch (error) {
+     setMessage(`Signup Error: ${error}`);
+     return false;
+   }
+ }
+  
+ 
 
   return (
     <div id="app">
@@ -98,14 +106,30 @@ function App() {
               {" "}
             </Route>
             <Route
-              path="/Login-Page"
-              element={<LoginPage handleSubmit={loginUser} />}
+              path="/Teacher-Login"
+              element={<LoginPage user={"Teacher"} handleSubmit={loginUser} />}
             >
               {" "}
             </Route>
             <Route
-              path="/Signup-Page"
-              element={<SignupPage handleSubmit={signupUser} />}
+              path="/Student-Login"
+              element={<LoginPage user={"Student"} handleSubmit={loginUser} />}
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/Signup-Student"
+              element={
+                <SignupPage user={"Student"} handleSubmit={signupUser} />
+              }
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/Signup-Teacher"
+              element={
+                <SignupPage user={"Teacher"} handleSubmit={signupUser} />
+              }
             >
               {" "}
             </Route>

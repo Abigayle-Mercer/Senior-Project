@@ -7,21 +7,37 @@ import "./login.css";
 interface Props {
   buttonLabel?: string;
   handleSubmit: (creds: Credentials) => Promise<boolean>;
+  user: string;
 }
 
 interface Credentials {
   username: string;
   pwd: string;
+  isTeacher?: boolean;
 }
 
 const LoginPage: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [isTeacher, setIsTeacher] = useState(false);
 
+  if (props.user === "Teacher") {
+    setIsTeacher(true);
+    }
+ 
+  const handleSwitchToSignUp = () => {
+    if (props.user === "Teacher") {
+            navigate("/Signup-Teacher");
+    }
+    else {
+        navigate("/Signup-Student");
+    }
+  }
 
   const [creds, setCreds] = useState<Credentials>({
     username: "",
     pwd: "",
+    isTeacher: isTeacher, // ask if there needs to be a question mark here 
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -47,13 +63,11 @@ const LoginPage: React.FC<Props> = (props) => {
     setCreds({ username: "", pwd: "" });
   };
 
-  const handleSwitchToSignUp = () => {
-    navigate("/Signup-Page");
-  };
+  
 
   return (
     <div className="login-container">
-      <h2>Teacher Log In</h2>
+      <h2>{props.user} Log In</h2>
       <form>
         <div className="input-group">
           <label>Username:</label>

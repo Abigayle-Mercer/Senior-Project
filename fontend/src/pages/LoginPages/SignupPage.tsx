@@ -5,25 +5,41 @@ import "./login.css";
 interface Props {
   buttonLabel?: string;
   handleSubmit: (creds: Credentials) => Promise<boolean>;
+  user: string,
 }
 
 interface Credentials {
   username: string;
   pwd: string;
+  isTeacher?: boolean;
 }
 const SignupPage: React.FC<Props> = (props) => {
   const [name, setName] = useState("");
   const [district, setDistrict] = useState("");
+  const [isTeacher, setIsTeacher] = useState(false);
+
 
   const navigate = useNavigate();
-  const navigateToLogin = () => {
-    navigate("/Login-Page");
-  };
+  
 
-  const [creds, setCreds] = useState<Credentials>({
-    username: "",
-    pwd: "",
-  });
+   if (props.user === "Teacher") {
+     setIsTeacher(true);
+   }
+
+   const handleSwitchToLogin = () => {
+     if (props.user === "Teacher") {
+       navigate("/Login-Teacher");
+     } else {
+       navigate("/Login-Student");
+     }
+   };
+
+   const [creds, setCreds] = useState<Credentials>({
+     username: "",
+     pwd: "",
+     isTeacher: isTeacher, // ask if there needs to be a question mark here
+   });
+
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -90,7 +106,7 @@ const SignupPage: React.FC<Props> = (props) => {
         <button onClick={submitForm} type="button" className="login-btn">
           Sign Up
         </button>
-        <span onClick={navigateToLogin}> Already have an account? Login</span>
+        <span onClick={handleSwitchToLogin}> Already have an account? Login</span>
       </form>
     </div>
   );
