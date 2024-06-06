@@ -20,7 +20,7 @@ import express from "express";
 import mongoose from "mongoose";
 import  {surveyRoutes}  from "./routes/surveys.js";
 
-
+import {classRoutes} from "./routes/class.js";
 import {teacherRoutes} from "./routes/teacher.js";
 import {categoryRoutes} from "./routes/category.js";
 import {promptRoutes} from "./routes/prompt.js";
@@ -30,11 +30,10 @@ import {reflectionRoutes} from "./routes/reflection.js";
 import {reflectionResponseRoutes} from "./routes/reflectionResponse.js";
 import {studentRoutes} from "./routes/student.js";
 
-import authRoutes, {
-  registerStudent,
-  registerTeacher,
+import {
+  registerUser,
   loginUser,
-  verifyEmail,
+
 } from "./auth.js";
 
 
@@ -60,12 +59,13 @@ app.use("/api/promptResponses", promptResponseRoutes);
 app.use("/api/reflections", reflectionRoutes);
 app.use("/api/reflectionResponses", reflectionResponseRoutes);
 app.use("/api/students", studentRoutes);
+app.use("/api/classes", classRoutes);
 
 // Authentication
-app.post("/signup/student", registerStudent); 
-app.post("/signup/teacher", registerTeacher); 
+app.post("/signup/student", registerUser); 
+app.post("/signup/teacher", registerUser); 
 app.post("/login", loginUser);
-app.get("/verify/:token", verifyEmail);
+
 
 // connect to DB
 console.log("HELLO")

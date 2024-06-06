@@ -21,6 +21,7 @@
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.0",
     "nodemailer": "^6.9.13",
-    "ts-models": "^0.0.13"
+    "ts-models": "^0.0.13",
+    "uuid": "^9.0.1"
   }
 }

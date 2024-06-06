@@ -7,10 +7,10 @@ import { useAuth } from "../../components/useAuth/useAuth";
 function HomePage() {
      const navigate = useNavigate();
      const navigateToTeacherLogin = () => {
-       navigate("/Teacher-Login");
+       navigate("/Login-Teacher");
      };
      const navigateToStudentLogin = () => {
-       navigate("/Student-Login");
+       navigate("/Login-Student");
      };
 
     //const { logout } = useAuth();

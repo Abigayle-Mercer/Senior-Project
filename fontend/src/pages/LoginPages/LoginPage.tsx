@@ -21,7 +21,7 @@ const LoginPage: React.FC<Props> = (props) => {
   const { login } = useAuth();
   const [isTeacher, setIsTeacher] = useState(false);
 
-  if (props.user === "Teacher") {
+  if (props.user === "Teacher" && !isTeacher) {
     setIsTeacher(true);
     }
  

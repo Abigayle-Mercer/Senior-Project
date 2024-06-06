@@ -22,7 +22,7 @@ const SignupPage: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   
 
-   if (props.user === "Teacher") {
+   if (props.user === "Teacher" && !isTeacher) {
      setIsTeacher(true);
    }
 
@@ -65,7 +65,7 @@ const SignupPage: React.FC<Props> = (props) => {
 
   return (
     <div className="login-container">
-      <h2>Teacher Sign Up</h2>
+      <h2>{props.user} Sign Up</h2>
       <form>
         <div className="input-group">
           <label>Name:</label>

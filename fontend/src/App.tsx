@@ -106,13 +106,13 @@ interface Credentials {
               {" "}
             </Route>
             <Route
-              path="/Teacher-Login"
+              path="/Login-Teacher"
               element={<LoginPage user={"Teacher"} handleSubmit={loginUser} />}
             >
               {" "}
             </Route>
             <Route
-              path="/Student-Login"
+              path="/Login-Student"
               element={<LoginPage user={"Student"} handleSubmit={loginUser} />}
             >
               {" "}
