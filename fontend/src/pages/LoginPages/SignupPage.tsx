@@ -53,7 +53,12 @@ const SignupPage: React.FC<Props> = (props) => {
     props.handleSubmit(creds).then(
       function retreiveSuccess(bool: boolean) {
         if (bool) {
-          navigate("/Login-Page");
+          if (isTeacher) {
+            navigate("/Login-Teacher");
+          } else {
+
+          }
+          navigate("/Login-Student");
         }
       }
       // navigate(/dashboard )

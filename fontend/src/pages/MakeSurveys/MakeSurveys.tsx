@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./MakeSurveys.css";
 
 interface Field {
   label: string;
@@ -71,46 +72,48 @@ const FormSubmission: React.FC = () => {
     });
   };
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          placeholder="Form Title"
-          style={{ width: "100%", marginBottom: "10px" }}
-        />
-        {formData.fields.map((field, fieldIndex) => (
-          <div key={fieldIndex} style={{ marginBottom: "5px" }}>
-            <div style={{ display: "flex" }}>
+    return (
+      <div className="form-card">
+        <div>
+          <h2 style={{ color: 'black' }}>New Survey</h2>
+            <form onSubmit={handleSubmit}>
               <input
                 type="text"
-                value={field.label}
-                onChange={(e) => {
-                  const newFields = [...formData.fields];
-                  newFields[fieldIndex].label = e.target.value;
-                  setFormData({ ...formData, fields: newFields });
-                }}
-                placeholder="Label"
-                style={{ width: "100%" }}
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                placeholder="Survey Title"
+                style={{ width: "600px", marginBottom: "10px" }}
               />
-              <button
-                type="button"
-                onClick={() => handleDeleteField(fieldIndex)}
-                style={{ fontSize: "12px", margin: "5px" }}
-              >
-                Delete Label
-              </button>
-            </div>
-            {field.values.map((value, valueIndex) => (
+              {formData.fields.map((field, fieldIndex) => (
+                <div key={fieldIndex} style={{ marginBottom: "10px" }}>
+                  <div style={{ display: "flex" }}>
+                    <input
+                      type="text"
+                      value={field.label}
+                      onChange={(e) => {
+                        const newFields = [...formData.fields];
+                        newFields[fieldIndex].label = e.target.value;
+                        setFormData({ ...formData, fields: newFields });
+                      }}
+                      placeholder="Label"
+                      style={{ width: "500px", marginLeft: "100px", height: "15px"}} // Adjust the marginLeft here
+                      />
+                    <button
+                      type="button"
+                      className="form-buttton"
+                      onClick={() => handleDeleteField(fieldIndex)} 
+                    >
+                      Delete Label
+                    </button>
+                    </div>
+                    {field.values.map((value, valueIndex) => (
               <div key={valueIndex} style={{ display: "flex", margin: "5px" }}>
                 <input
                   type="text"
                   value={value}
                   onChange={(e) => handleChange(fieldIndex, valueIndex, e)}
                   placeholder="Value"
-                  style={{ width: "calc(100% - 80px)", marginRight: "10px" }}
+                  style={{ width: "300px", marginLeft: "125px", height: "15px" }}
                 />
                 <button
                   type="button"
@@ -121,19 +124,19 @@ const FormSubmission: React.FC = () => {
                 </button>
               </div>
             ))}
-            <button type="button" onClick={() => handleAddValue(fieldIndex)}>
-              Add Value
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={handleAddField}>
-          Add Field
-        </button>
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={navigateToDashBoard}>Back</button>
-    </div>
-  );
-};
+                 
+                    <button  className="form-buttton" type="button" onClick={() => handleAddValue(fieldIndex)}>
+                       Add Value
+                    </button>
+                  </div>
+                ))}
+              
+              <button className="inner-button" type="submit">Submit</button>
+            </form>
+          
+        </div>
+      </div>
+    );
+  };
 
 export default FormSubmission;

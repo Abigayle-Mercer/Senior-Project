@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./MakeSurveys.css";
 
 interface Field {
   label: string;
@@ -12,11 +14,17 @@ interface FormData {
 }
 
 const FormSubmission: React.FC = () => {
+
   const [formData, setFormData] = useState<FormData>({
     title: "",
     fields: [{ label: "", values: [""] }],
     additionalFields: 0,
   });
+  const navigate = useNavigate();
+
+  const navigateToDashBoard = () => {
+    navigate("/DashBoard");
+  };
 
   const handleChange = (
     fieldIndex: number,
@@ -65,7 +73,7 @@ const FormSubmission: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="card">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -75,23 +83,29 @@ const FormSubmission: React.FC = () => {
           style={{ width: "100%", marginBottom: "10px" }}
         />
         {formData.fields.map((field, fieldIndex) => (
-          <div key={fieldIndex} style={{ marginBottom: "10px" }}>
-            <input
-              type="text"
-              value={field.label}
-              onChange={(e) => {
-                const newFields = [...formData.fields];
-                newFields[fieldIndex].label = e.target.value;
-                setFormData({ ...formData, fields: newFields });
-              }}
-              placeholder="Label"
-              style={{ width: "100%" }}
-            />
-            {field.values.map((value, valueIndex) => (
-              <div
-                key={valueIndex}
-                style={{ display: "flex", marginBottom: "5px" }}
+          <div key={fieldIndex} style={{ marginBottom: "5px" }}>
+            <div style={{ display: "flex" }}>
+              <input
+                type="text"
+                value={field.label}
+                onChange={(e) => {
+                  const newFields = [...formData.fields];
+                  newFields[fieldIndex].label = e.target.value;
+                  setFormData({ ...formData, fields: newFields });
+                }}
+                placeholder="Label"
+                style={{ width: "100%" }}
+              />
+              <button
+                type="button"
+                onClick={() => handleDeleteField(fieldIndex)}
+                style={{ fontSize: "12px", margin: "5px" }}
               >
+                Delete Label
+              </button>
+            </div>
+            {field.values.map((value, valueIndex) => (
+              <div key={valueIndex} style={{ display: "flex", margin: "5px" }}>
                 <input
                   type="text"
                   value={value}
@@ -102,6 +116,7 @@ const FormSubmission: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => handleDeleteValue(fieldIndex, valueIndex)}
+                  style={{ fontSize: "12px" }}
                 >
                   Delete
                 </button>
@@ -110,9 +125,6 @@ const FormSubmission: React.FC = () => {
             <button type="button" onClick={() => handleAddValue(fieldIndex)}>
               Add Value
             </button>
-            <button type="button" onClick={() => handleDeleteField(fieldIndex)}>
-              Delete Label
-            </button>
           </div>
         ))}
         <button type="button" onClick={handleAddField}>
@@ -120,6 +132,7 @@ const FormSubmission: React.FC = () => {
         </button>
         <button type="submit">Submit</button>
       </form>
+      <button onClick={navigateToDashBoard}>Back</button>
     </div>
   );
 };
