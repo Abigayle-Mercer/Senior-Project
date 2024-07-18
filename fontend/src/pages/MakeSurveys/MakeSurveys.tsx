@@ -82,7 +82,7 @@ const FormSubmission: React.FC = () => {
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 placeholder="Survey Title"
-                style={{ width: "600px", marginBottom: "10px" }}
+                style={{ width: "600px", height: "20px", marginBottom: "10px", fontSize: "18px" }}
               />
               {formData.fields.map((field, fieldIndex) => (
                 <div key={fieldIndex} style={{ marginBottom: "10px" }}>
@@ -96,14 +96,17 @@ const FormSubmission: React.FC = () => {
                         setFormData({ ...formData, fields: newFields });
                       }}
                       placeholder="Label"
-                      style={{ width: "500px", marginLeft: "100px", height: "15px"}} // Adjust the marginLeft here
+                      style={{ width: "470px", marginLeft: "200px", height: "15px"}} // Adjust the marginLeft here
                       />
                     <button
                       type="button"
-                      className="form-buttton"
+                      className="form-button"
                       onClick={() => handleDeleteField(fieldIndex)} 
                     >
-                      Delete Label
+                      - Field
+                    </button>
+                    <button className="form-button" type="button" onClick={handleAddField}>
+                    + Field
                     </button>
                     </div>
                     {field.values.map((value, valueIndex) => (
@@ -113,20 +116,21 @@ const FormSubmission: React.FC = () => {
                   value={value}
                   onChange={(e) => handleChange(fieldIndex, valueIndex, e)}
                   placeholder="Value"
-                  style={{ width: "300px", marginLeft: "125px", height: "15px" }}
+                  style={{ width: "470px", marginLeft: "225px", height: "15px" }}
                 />
                 <button
                   type="button"
+                  className="delete-button"
                   onClick={() => handleDeleteValue(fieldIndex, valueIndex)}
                   style={{ fontSize: "12px" }}
                 >
-                  Delete
+                  -
                 </button>
               </div>
             ))}
                  
-                    <button  className="form-buttton" type="button" onClick={() => handleAddValue(fieldIndex)}>
-                       Add Value
+                    <button  className="add-button" type="button" onClick={() => handleAddValue(fieldIndex)}>
+                       +
                     </button>
                   </div>
                 ))}

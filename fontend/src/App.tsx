@@ -3,6 +3,8 @@ import { HomePage, LoginPage, SignupPage, DashBoard, LoginTest, PreviousResponse
 import React, { useState } from "react";
 import { AuthProvider } from "./components/useAuth/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
+import Layout from './components/Layout/Layout';
+
 
 
 import "../defined.js";
@@ -137,18 +139,15 @@ interface Credentials {
               path="/DashBoard"
               element={
                 <ProtectedRoute>
-                  <DashBoard />
+                  <Layout>
+                    <DashBoard />
+                  </Layout>
                 </ProtectedRoute>
               }
             >
               {" "}
             </Route>
-            <Route
-              path="/Login-Test"
-              element={<LoginTest handleSubmit={loginUser} />}
-            >
-              {" "}
-            </Route>
+            fpr
             <Route path="/Stats-Page" element={<StatsPage />}>
               {" "}
             </Route>

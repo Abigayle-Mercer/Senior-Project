@@ -1,7 +1,7 @@
 import React from "react";
 import "./DashBoard.css";
 import { useNavigate } from "react-router-dom";
-
+import Navbar from "../../components/Navbar/Navbar";
 function DashBoard() {
 
 
@@ -21,6 +21,7 @@ function DashBoard() {
   };
   return (
     <div>
+      
       <div className="container">
         <div
           className="card"
