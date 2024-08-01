@@ -148,18 +148,42 @@ interface Credentials {
               {" "}
             </Route>
             fpr
-            <Route path="/Stats-Page" element={<StatsPage />}>
+            <Route path="/Stats-Page" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <StatsPage />
+                  </Layout>
+                </ProtectedRoute>
+              }>
               {" "}
             </Route>
-            <Route path="/MakeSurveys-Page" element={<MakeSurveys />}>
+            <Route path="/MakeSurveys-Page" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <MakeSurveys />
+                  </Layout>
+                </ProtectedRoute>
+              }>
               {" "}
             </Route>
-            <Route path="/FindSurveys-Page" element={<FindSurveys />}>
+            <Route path="/FindSurveys-Page" element={
+                <ProtectedRoute>
+                  <Layout>
+                    <FindSurveys />
+                  </Layout>
+                </ProtectedRoute>
+              }>
               {" "}
             </Route>
             <Route
               path="/PreviousResponses-Page"
-              element={<PreviousResponses />}
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <PreviousResponses />
+                  </Layout>
+                </ProtectedRoute>
+              }
             >
               {" "}
             </Route>

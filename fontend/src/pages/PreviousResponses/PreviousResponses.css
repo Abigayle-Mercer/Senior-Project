@@ -1,0 +1,46 @@
+/* PreviousResponses.css */
+
+.previous-responses-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 200px; /* Adjust as necessary */
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+    height: 90vh;
+
+    overflow-y: auto; /* Enable scrolling within main content */
+
+
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+  }
+  
+  .button-container button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #357aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .button-container button:hover {
+    background-color: #2851a3;
+  }
+  
+  .component-container {
+    margin-top: 20px;
+  }
+  

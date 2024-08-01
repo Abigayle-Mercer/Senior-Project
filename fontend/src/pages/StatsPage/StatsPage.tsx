@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
 
 type SurveyData = {
   [key: string]: string[];
@@ -12,7 +11,6 @@ const surveys: SurveyData = {
 };
 
 function StatsPage() {
-  const navigate = useNavigate();
   const [selectedSurvey, setSelectedSurvey] = useState<string>("");
   const [selectedDate1, setSelectedDate1] = useState<string>("");
   const [selectedDate2, setSelectedDate2] = useState<string>("");
@@ -34,9 +32,7 @@ function StatsPage() {
     setSelectedDate2(date);
   };
 
-  const navigateToDashBoard = () => {
-    navigate("/DashBoard");
-  };
+
 
   return (
     <div>
@@ -90,7 +86,6 @@ function StatsPage() {
           )}
         </div>
       </div>
-      <button onClick={navigateToDashBoard}>Back</button>
     </div>
   );
 }

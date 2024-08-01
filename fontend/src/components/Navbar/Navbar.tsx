@@ -1,16 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css'; // Assuming your styles are in App.css
+import { useAuth } from "../useAuth/useAuth";
 
 const Navbar = () => {
+    const { logout } = useAuth();
+
   const navigate = useNavigate();
 
   const navigateToHome = () => {
-    navigate('/');
+    logout();
   };
 
   const navigateToDashboard = () => {
-    navigate('/dashboard');
+    navigate('/DashBoard');
   };
 
   return (

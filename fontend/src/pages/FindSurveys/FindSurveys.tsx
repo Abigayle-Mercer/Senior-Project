@@ -23,6 +23,7 @@ const Search: React.FC = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <div style={{display: "flex"}}>
         <input
           type="text"
           value={searchQuery}
@@ -30,6 +31,7 @@ const Search: React.FC = () => {
           placeholder="Enter your search query..."
           style={{
             padding: "10px",
+            width: "200px",
             fontSize: "16px",
             borderRadius: "5px",
             border: "1px solid #ccc",
@@ -48,10 +50,11 @@ const Search: React.FC = () => {
             cursor: "pointer",
           }}
         >
+          
           Search
         </button>
+        </div>
       </form>
-      <button onClick={navigateToDashBoard}>Back</button>
     </div>
   );
 };
