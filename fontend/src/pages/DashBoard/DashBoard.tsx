@@ -6,6 +6,14 @@ function DashBoard() {
 
 
 
+  const todos = [
+    {survey: "SURVEY 1234567", data: "10/2/2022", class: "AP BIO", status: "not submitted"},
+    {survey: "SURVEY 2", data: "9/24/2022", class: "SOCIAL STUDIES", status: "not submitted"},
+    {survey: "SURVEY 3", data: "12/5/2022", class: "HOME ROOM", status: "not submitted"}
+
+  ]
+
+
   const navigate = useNavigate();
   const navigateToStats = () => {
     navigate("/Stats-Page");
@@ -53,14 +61,25 @@ function DashBoard() {
         </div>
       </div>
 
-      <div className="container2">
-        <div className="resource">
-          <h2 className="title"> Resource 1</h2>
+      <div className="lower-content">
+        <div className="todo">
+          <div className="todo-content">
+            <h2>TODO: </h2>
+
+            <div className="todo-list">
+              {todos.map((todo, index) => (
+                <div key={index} className="todo-cell">
+                  <p>{todo.survey}</p>
+                  <p>{todo.data}</p>
+                  <p>{todo.class}</p>
+                  <p>{todo.status}</p>
+                </div>
+              ))}
+            </div>
+            
+          </div>
         </div>
-        <div className="resource">
-          <h2 className="title">Resource 2</h2>
-        </div>
-      </div>
+     
       <div className="container2">
         <div className="resource">
           <h2 className="title">Resource 3</h2>
@@ -68,6 +87,7 @@ function DashBoard() {
         <div className="resource">
           <h2 className="title">Resource 4</h2>
         </div>
+      </div>
       </div>
     </div>
   );

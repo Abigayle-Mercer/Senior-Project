@@ -2,17 +2,56 @@
 
 .container {
   display: flex;
-  height: 35vh; /* Set the height to half of the viewport height */
+  
+  margin-top: 50px;
 }
+.lower-content {
+    display: flex;
+  
+}
+
+
+
 .container2 {
-    
-  display: flex;
+  margin-top: 20px;
 }
+
+.todo {
+  background-color: #f3f4f6;
+  width: 580px;
+  height: 430px;
+  margin-top: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo-content {
+  height: 40vh;
+}
+
+.todo-list {
+ 
+
+}
+
+.todo-cell {
+  display: flex;
+
+  text-align: center;
+}
+
+.todo-cell p {
+  margin-left: 15px;
+}
+
 .resource {
   background-color: #f3f4f6;
   width: 580px;
-  height: 150px;
-  margin: 10px;
+  height: 200px;
+  margin: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
