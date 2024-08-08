@@ -30,15 +30,22 @@
 
 .todo-content {
   height: 40vh;
+  
 }
 
 .todo-list {
- 
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
 
+.todo-header, .todo-row {
+  display: flex;
+  width: 100%;
 }
 
 .todo-cell {
-  display: flex;
+  flex: 1;
 
   text-align: center;
 }
@@ -47,6 +54,20 @@
   margin-left: 15px;
 }
 
+
+.todo-cell.header {
+  font-weight: bold;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #ccc;
+}
+
+.todo-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.todo-row:hover {
+  background-color: #e0e0e0;
+}
 .resource {
   background-color: #f3f4f6;
   width: 580px;

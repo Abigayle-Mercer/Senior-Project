@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, LoginPage, SignupPage, DashBoard, LoginTest, PreviousResponses, MakeSurveys, StatsPage, FindSurveys } from "./pages/pages";
+import { HomePage, LoginPage, SignupPage, DashBoard, TeacherDashBoard, PreviousResponses, MakeSurveys, StatsPage, FindSurveys } from "./pages/pages";
 import React, { useState } from "react";
 import { AuthProvider } from "./components/useAuth/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
@@ -147,7 +147,20 @@ interface Credentials {
             >
               {" "}
             </Route>
-            fpr
+
+            <Route
+              path="/TeacherDashBoard"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <TeacherDashBoard />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            >
+              {" "}
+            </Route>
+            
             <Route path="/Stats-Page" element={
                 <ProtectedRoute>
                   <Layout>
