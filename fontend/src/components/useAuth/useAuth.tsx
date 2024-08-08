@@ -5,6 +5,8 @@ import { useLocalStorage } from "../useLocalStorage/useLocalStorage";
 interface User {
   // Define your user interface here
   email: string;
+  isTeacher: boolean;
+  
 }
 
 interface AuthContextType {
@@ -24,7 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // call this function when you want to authenticate the user
   const login = async (data: User) => {
     setUser(data);
-    navigate("/DashBoard");
+    
   };
 
   // call this function to sign out logged in user

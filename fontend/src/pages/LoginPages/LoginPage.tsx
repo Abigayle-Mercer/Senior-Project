@@ -53,14 +53,15 @@ const LoginPage: React.FC<Props> = (props) => {
       async function retreiveSuccess(bool: boolean) {
         if (bool) {
           if (props.user === "Teacher") {
+            console.log("HIIIII")
             navigate("/TeacherDashBoard");
             const email = creds.username;
-            await login({ email });
+            await login({ email, isTeacher });
 
           } else {
             navigate("/DashBoard");
             const email = creds.username;
-            await login({ email });
+            await login({ email, isTeacher });
 
           }
         

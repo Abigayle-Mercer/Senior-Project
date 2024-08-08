@@ -1,5 +1,5 @@
 import React from "react";
-import "./DashBoard.css";
+import "./TeacherDashBoard.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -32,24 +32,37 @@ function TeacherDashBoard() {
           <h2 className="title">Make a new Survey!</h2>
         </div>
       </div>
+      <div className="middle-content">
+        <div className="add-class">
+            <span>Classes:</span>
+            <select className="class-dropdown">
+            <option value="">Select a class</option>
+            <option value="class1">Class 1</option>
+            <option value="class2">Class 2</option>
+            <option value="class3">Class 3</option>
+            </select>
+            <button className="button-add">+</button>
+        </div>
+    </div>
+
+
 
       <div className="lower-content">
-        <div className="todo">
-          <div className="todo-content">
-            <h2>TODO:</h2>
+        <div className="teacher-todo">
+            <div className="assign-survey">
 
+            </div>
           
-          </div>
         </div>
 
-        <div className="container2">
-          <div className="resource">
-            <h2 className="title">Resource 3</h2>
-          </div>
-          <div className="resource">
-            <h2 className="title">Resource 4</h2>
-          </div>
+        <div className="teacher-todo">
+          
         </div>
+
+        <div className="teacher-todo">
+          
+        </div>
+       
       </div>
     </div>
   );

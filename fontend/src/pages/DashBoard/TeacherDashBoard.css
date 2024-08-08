@@ -1,0 +1,131 @@
+
+
+.container {
+    display: flex;
+    
+    margin-top: 50px;
+  }
+  
+  
+  .middle-content {
+    margin-top: 20px; /* Optional: Add spacing from the top */
+    margin-left: 10px;
+    text-align: left;
+    font-size: 18px; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: black; /* Set text color to black */
+    display: flex;
+  }
+  
+  .class-dropdown {
+    margin-left: 10px; /* Space between text and dropdown */
+    padding: 5px;
+    font-size: 14px; /* Adjust font size as needed */
+    border-radius: 5px;
+  }
+  
+  .button-add {
+    border-color: lightgrey;
+    font-size: 12px;
+    border-radius: 20px; /* Different border radius */
+    padding:  5px 8px;
+    margin-left: 15px;
+  
+  }
+  
+  
+  
+  .container2 {
+    margin-top: 4px;
+  }
+
+  .lower-content {
+    display: flex;
+    }
+  
+  .teacher-todo {
+    background-color: #f3f4f6;
+    width: 382px;
+    height: 430px;
+    margin-top: 30px;
+    margin-left: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .assign-survey {
+    
+  }
+  
+  .todo-content {
+    height: 40vh;
+    
+  }
+  
+  .todo-list {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+  }
+  
+  .todo-header, .todo-row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .todo-cell {
+    flex: 1;
+  
+    text-align: center;
+  }
+  
+  .todo-cell p {
+    margin-left: 15px;
+  }
+  
+  
+  .todo-cell.header {
+    font-weight: bold;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #ccc;
+  }
+  
+  .todo-row:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .todo-row:hover {
+    background-color: #e0e0e0;
+  }
+  .resource {
+    background-color: #f3f4f6;
+    width: 580px;
+    height: 200px;
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card {
+    color: white;
+    width: 280px;
+    height: 150px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
