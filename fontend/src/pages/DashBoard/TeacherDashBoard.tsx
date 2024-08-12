@@ -1,20 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TeacherDashBoard.css";
 import { useNavigate } from "react-router-dom";
+import CreateNewClass from "../../components/CreateNewClass/CreateNewClass";
 import Navbar from "../../components/Navbar/Navbar";
 
+
 function TeacherDashBoard() {
+  const [isPanelVisible, setIsPanelVisible] = useState(false);
+
   const todos = [
     { survey: "SURVEY 1234567", data: "10/2/2022", class: "AP BIO", status: "not submitted" },
     { survey: "SURVEY 2", data: "9/24/2022", class: "SOCIAL STUDIES", status: "not submitted" },
     { survey: "SURVEY 3", data: "12/5/2022", class: "HOME ROOM", status: "not submitted" }
   ];
 
+  const classes = [
+    {classname: "Class 1"},
+    {classname: "Class 2"},
+    {classname: "Class 3"},
+  ]
+
   const navigate = useNavigate();
   const navigateToStats = () => navigate("/Stats-Page");
   const navigateToFindSurveys = () => navigate("/FindSurveys-Page");
   const navigateToMakeSurveys = () => navigate("/MakeSurveys-Page");
   const navigateToPreviousResponses = () => navigate("/PreviousResponses-Page");
+
+  const togglePanel = () => {
+    setIsPanelVisible(!isPanelVisible);
+  };
+
+  const handleOverlayClick = (event: React.MouseEvent) => {
+    if (event.currentTarget === event.target) {
+      togglePanel();
+    }
+  };
 
   return (
     <div>
@@ -37,14 +57,25 @@ function TeacherDashBoard() {
             <span>Classes:</span>
             <select className="class-dropdown">
             <option value="">Select a class</option>
-            <option value="class1">Class 1</option>
-            <option value="class2">Class 2</option>
-            <option value="class3">Class 3</option>
+            {classes.map((cls, index) => (
+              <option key={index} value={cls.classname}>
+                {cls.classname}
+              </option>
+            ))}
             </select>
-            <button className="button-add">+</button>
+            <button className="button-add" onClick={togglePanel}>+</button>
         </div>
     </div>
 
+
+    {isPanelVisible && (
+        <div className="overlay" onClick={handleOverlayClick}>
+          <div className="sliding-panel" onClick={(e) => e.stopPropagation()}>
+            <h2 className="panel-title">Create New Class</h2>
+            <CreateNewClass />
+          </div>
+        </div>
+      )}
 
 
       <div className="lower-content">

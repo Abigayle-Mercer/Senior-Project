@@ -1,0 +1,145 @@
+/* CreateNewClass.css */
+
+.create-class-container {
+    background-color: white;
+    padding: 20px;
+    width: 95%;
+    height: 80vh; /* Set height to a percentage of viewport height */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    background-color: #f9f9f9;
+    gap: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group input {
+   
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 15px;
+    width: 800px;
+    margin-left: 10px;
+  }
+  
+  .students-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Allow the card to grow and shrink as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+  }
+  
+  .students-card h3 {
+    margin-top: 0;
+  }
+  
+  .students-card ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .students-card li {
+    padding: 5px 0;
+  }
+  
+  .submit-btn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .student-name {
+    font-weight: bold;
+  }
+  
+  .student-email {
+    color: #555;
+  }
+
+  .student-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .add-student {
+    font-weight: bold;
+    margin-top: 5px;
+    border-color: lightgrey;
+    font-size: 12px;
+    border-radius: 15px; /* Different border radius */
+    
+    
+  }
+
+  .search-results {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .search-results li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .search-results li:hover {
+    background-color: #f0f0f0;
+  }
+
+
+  .popup {
+    position: absolute; /* Positioning it absolutely within the .create-class-container */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center it */
+    width: 350px;
+    padding: 20px;
+    
+  }
+  
+  .popup-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-height: 300px; /* Set a max height */
+    overflow-y: auto; /* Enable vertical scrolling */
+
+  }
+  
+  .popup-content input {
+    width: 90%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  
