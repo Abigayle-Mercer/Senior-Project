@@ -82,9 +82,9 @@
   align-items: center;
 }
 
-.card {
+.s-card {
   color: white;
-  width: 280px;
+  width: 380px;
   height: 150px;
   margin: 10px;
   border-radius: 10px;

@@ -23,7 +23,7 @@ const FormSubmission: React.FC = () => {
   const navigate = useNavigate();
 
   const navigateToDashBoard = () => {
-    navigate("/DashBoard");
+    navigate("/StudentDashBoard");
   };
 
   const handleChange = (

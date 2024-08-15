@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, LoginPage, SignupPage, DashBoard, TeacherDashBoard, PreviousResponses, MakeSurveys, StatsPage, FindSurveys } from "./pages/pages";
+import { HomePage, LoginPage, SignupPage, StudentDashBoard, TeacherDashBoard, PreviousResponses, MakeSurveys, StatsPage, FindSurveys, TakeSurvey } from "./pages/pages";
 import React, { useState } from "react";
 import { AuthProvider } from "./components/useAuth/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
@@ -136,11 +136,11 @@ interface Credentials {
               {" "}
             </Route>
             <Route
-              path="/DashBoard"
+              path="/StudentDashBoard"
               element={
                 <ProtectedRoute>
                   <Layout>
-                    <DashBoard />
+                    <StudentDashBoard />
                   </Layout>
                 </ProtectedRoute>
               }
@@ -194,6 +194,18 @@ interface Credentials {
                 <ProtectedRoute>
                   <Layout>
                     <PreviousResponses />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            >
+              {" "}
+            </Route>
+            <Route
+              path="/TakeSurvey"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <TakeSurvey />
                   </Layout>
                 </ProtectedRoute>
               }

@@ -16,7 +16,7 @@ const Navbar = () => {
         if (user.isTeacher) {
             navigate('/TeacherDashBoard');
         } else {
-            navigate('/DashBoard');
+            navigate('/StudentDashBoard');
         }
     };
 

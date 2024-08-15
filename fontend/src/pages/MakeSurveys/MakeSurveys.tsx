@@ -20,11 +20,8 @@ const FormSubmission: React.FC = () => {
     fields: [{ label: "", values: [""] }],
     additionalFields: 0,
   });
-  const navigate = useNavigate();
 
-  const navigateToDashBoard = () => {
-    navigate("/DashBoard");
-  };
+ 
 
   const handleChange = (
     fieldIndex: number,

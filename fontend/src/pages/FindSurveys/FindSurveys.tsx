@@ -3,11 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Search: React.FC = () => {
-    const navigate = useNavigate();
-
-   const navigateToDashBoard = () => {
-     navigate("/DashBoard");
-   };
+  
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -58,46 +58,144 @@
 
   .assign-survey {
     
+      height: 47vh;
+      
+    
   }
+
+  .past-surveys {
+    height: 47vh;
+  }
+
+  .selected-survey {
+    height: 47vh;
+
+  }
+
+  .survey-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+  
+  .survey-button {
+    background-color: lightgrey; /* Button background color */
+    color: darkslategray; /* Text color */
+     padding: 4px 20px; /* Adjust padding to make the buttons shorter and wider */
+    border-radius: 15px; /* Rounded corners */
+    font-size: 11px; /* Adjust font size as needed */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 150px; /* Set a maximum width */
+    height: 22px;
+    
+  }
+  
+  .survey-button:hover {
+    background-color: lightseagreen /* Darker background on hover */
+  }
+
+  
+.liked-surveys-card {
+  background-color: lightgray; /* Light grey background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 270px; /* Adjust width as needed */
+  height: 200px;
+  /* max-width: 600px; /* Max width for larger screens */
+  margin-top: 15px;
+  
+}
+
+.liked-surveys-card h3 {
+  margin-top: 5px;
+ 
+}
+
+.survey-list {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto; /* Enable vertical scrolling */
+
+}
+
+.surveys-scroll {
+  height: 150px;
+  overflow-y: auto; /* Enable vertical scrolling */
+
+}
+
+
+.survey-cell {
+  margin-bottom: 15px;
+  display: flex;
+  background-color: white; /* Light grey background */
+  border-radius: 10px;
+  padding: 5px;
+
+}
+
+.survey-cell h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.survey-cell p {
+  margin: 5px 0 0;
+  font-size: 9px;
+}
+
+.submit-button {
+  background-color: #a0cc97; /* Button background color */
+    color: darkslategray; /* Text color */
+     padding: 4px 5px 20px; /* Adjust padding to make the buttons shorter and wider */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 14px; /* Adjust font size as needed */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold;
+    width: 100px; /* Set a maximum width */
+    height: 25px;
+    margin-top: 19px
+}
+
+
   
   .todo-content {
     height: 40vh;
     
   }
   
-  .todo-list {
+  .past-surveys-list {
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 350px;
+    overflow-y: auto; /* Enable vertical scrolling */
+
   }
   
-  .todo-header, .todo-row {
+  .past-surveys-header, .past-surveys-row {
     display: flex;
     width: 100%;
+    margin: 9px;
   }
   
-  .todo-cell {
+  .past-surveys-cell {
     flex: 1;
-  
     text-align: center;
   }
   
-  .todo-cell p {
+  .past-surveys-cell p {
     margin-left: 15px;
   }
   
   
-  .todo-cell.header {
+  .past-surveys-cell.header {
     font-weight: bold;
     background-color: #f4f4f4;
     border-bottom: 2px solid #ccc;
   }
   
-  .todo-row:nth-child(even) {
-    background-color: #f9f9f9;
-  }
   
-  .todo-row:hover {
+  .past-surveys-row:hover {
     background-color: #e0e0e0;
   }
   .resource {
@@ -187,3 +285,5 @@
     cursor: pointer;
     font-size: 16px;
   }
+
+  

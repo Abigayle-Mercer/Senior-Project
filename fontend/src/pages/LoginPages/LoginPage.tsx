@@ -59,7 +59,7 @@ const LoginPage: React.FC<Props> = (props) => {
             await login({ email, isTeacher });
 
           } else {
-            navigate("/DashBoard");
+            navigate("/StudentDashBoard");
             const email = creds.username;
             await login({ email, isTeacher });
 

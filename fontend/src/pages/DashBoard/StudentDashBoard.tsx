@@ -1,5 +1,5 @@
 import React from "react";
-import "./DashBoard.css";
+import "./StudentDashBoard.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -11,25 +11,22 @@ function DashBoard() {
   ];
 
   const navigate = useNavigate();
-  const navigateToStats = () => navigate("/Stats-Page");
-  const navigateToFindSurveys = () => navigate("/FindSurveys-Page");
-  const navigateToMakeSurveys = () => navigate("/MakeSurveys-Page");
-  const navigateToPreviousResponses = () => navigate("/PreviousResponses-Page");
+
+  const handleSurveyClick = (todo: typeof todos[0]) => {
+    navigate("/TakeSurvey", { state: { survey: todo } });
+  };
 
   return (
     <div>
       <div className="container">
-        <div className="card" style={{ backgroundColor: "#7bd9e3" }} onClick={navigateToStats}>
+        <div className="s-card" style={{ backgroundColor: "#7bd9e3" }} onClick={() => navigate("/Stats-Page")}>
           <h2 className="title">Stats Page</h2>
         </div>
-        <div className="card" style={{ backgroundColor: "#4fb2bd" }} onClick={navigateToPreviousResponses}>
+        <div className="s-card" style={{ backgroundColor: "#4fb2bd" }} onClick={() => navigate("/PreviousResponses-Page")}>
           <h2 className="title">Previous Responses</h2>
         </div>
-        <div className="card" style={{ backgroundColor: "#0e727d" }} onClick={navigateToFindSurveys}>
+        <div className="s-card" style={{ backgroundColor: "#0e727d" }} onClick={() => navigate("/FindSurveys-Page")}>
           <h2 className="title">Find New Surveys!</h2>
-        </div>
-        <div className="card" style={{ backgroundColor: "#094a63" }} onClick={navigateToMakeSurveys}>
-          <h2 className="title">Make a new Survey!</h2>
         </div>
       </div>
 
@@ -46,7 +43,7 @@ function DashBoard() {
                 <div className="todo-cell header">Status</div>
               </div>
               {todos.map((todo, index) => (
-                <div key={index} className="todo-row">
+                <div key={index} className="todo-row" onClick={() => handleSurveyClick(todo)}>
                   <div className="todo-cell">{todo.survey}</div>
                   <div className="todo-cell">{todo.data}</div>
                   <div className="todo-cell">{todo.class}</div>
