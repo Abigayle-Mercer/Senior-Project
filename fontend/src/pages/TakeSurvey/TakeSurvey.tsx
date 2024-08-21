@@ -12,25 +12,41 @@ interface Slice {
     fill: string;
     transform: string;
   }
+
+  interface Category {
+    category: string;
+    id: number;
+    survey: number;
+  }
+  
+  interface Prompt {
+    prompt: string;
+    id: number;
+    category: number;
+    fill: string;
+    transform: string;
+  }
+  
   
   interface State {
+    categories: Category[];
+    prompts: Prompt[];
     slices: Slice[];
+    
   }
 
 function TakeSurvey() {
 
-    const prompts_values = [{prompt: "1", id: 0, category: 1},
-        {prompt: "2", id: 1, category: "1"}, 
-        {prompt: "3", id: 2, category: "1"}, 
-        {prompt: "4", id: 3, category: "2"}, 
-        {prompt: "5", id: 4, category: "2"}, 
-        {prompt: "6", id: 5, category: "2"}]
-
-
-    const category_values = [{category: "1", id: 0, survey: 5},{category: "2", id: 1, survey: 5}]
-
+    
     
     const [state, setState] = useState({
+      categories: [{category: "1", id: 0, survey: 5},{category: "2", id: 1, survey: 5}],
+      prompts: [{prompt: "1", id: 0, category: "1"},
+        {prompt: "I can consistently identify and name my emotions in the moment.", id: 1, category: 0, fill: "#9245FF", transform: "0.01",}, 
+        {prompt: "I use self-reflection to understand the factors that contribute to my emotions and how my emotions impact me.", id: 2, category: 1, fill: "#9245FF", transform: "0.01",}, 
+        {prompt: "4", id: 3, category: "2", fill: "#9245FF", transform: "0.01",}, 
+        {prompt: "5", id: 4, category: "2", fill: "#9245FF", transform: "0.01",}, 
+        {prompt: "6", id: 5, category: "2", fill: "#9245FF", transform: "0.01",}],
         slices: [
           {
             id: 1,
@@ -216,6 +232,7 @@ function TakeSurvey() {
   const [wheel, setWheel] = useState(false);
 
   const selectScore = (questionIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("HERE")
     let targetValue = parseInt(e.target.value) / 100;
     if (targetValue === 1) {
       targetValue = 1.0;
@@ -231,7 +248,9 @@ function TakeSurvey() {
   if (!survey) {
     return <p>No survey data available.</p>;
   }
-
+  
+  console.log("HERE:")
+  console.log(state.categories)
   return (
     <div className="take-survey">
         {!start && ( 
@@ -246,8 +265,12 @@ function TakeSurvey() {
         {
             prompts && (
                 <div className="survey-content"> 
-                    <Prompts  categories={category_values} prompts={prompts_values} slices={state.slices} selectScore={selectScore} />
-                    <button className="wheel-button" onClick={() => {setPrompts(false); setWheel(true)}}>Go To Wheel</button>
+                <Prompts
+                  
+                  slices={state.slices}
+                  selectScore={selectScore}
+                />                    
+                <button className="wheel-button" onClick={() => {setPrompts(false); setWheel(true)}}>Go To Wheel</button>
                 </div>
             )
         }

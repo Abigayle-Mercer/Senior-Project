@@ -50,6 +50,17 @@ const PieChart: React.FC = () => {
     {y: 1, value: 8, category: 6, prompt: "prompt 12", gradientId: getGradientId(23)}, 
   ];
 
+  const categoryData = [
+    { x: "Category 1", y: 8 * 4 }, // 4 prompts in category 1
+    { x: "Category 2", y: 8 * 4 }, // 4 prompts in category 2
+    { x: "Category 3", y: 8 * 4 }, // 4 prompts in category 3
+    { x: "Category 4", y: 8 * 4 }, // 4 prompts in category 3
+    { x: "Category 5", y: 8 * 4 }, // 4 prompts in category 3
+    { x: "Category 6", y: 8 * 4 }, // 4 prompts in category 3
+
+    // Add categories with their corresponding prompt counts
+  ];
+
   // Function to calculate cx and cy values
   const calculateCValues = (index: number) => {
     const fraction = (index + 1) / num_Prompts;
