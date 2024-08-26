@@ -1,0 +1,62 @@
+.search {
+   
+}
+
+.survey-result {
+    margin-bottom: 15px;
+    display: flex;
+    background-color: white; /* Light grey background */
+    border-radius: 10px;
+    padding: 5px;
+}
+.survey-cell {
+    margin-bottom: 15px;
+    display: flex;
+    background-color: white; /* Light grey background */
+    border-radius: 10px;
+    padding: 5px;
+  }
+
+.result-scroll {
+    height: 350px;
+    width: 1000px;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.results {
+    background-color: #f3f4f6;
+    width: 1100px;
+    height: 450px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.survey-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.survey-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.survey-card p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.survey-card small {
+  font-size: 12px;
+  color: #888;
+}

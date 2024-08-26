@@ -1,21 +1,10 @@
-import React from "react";
+import  {useState} from "react";
 import "./Prompts.css";
-
-interface Slice {
-  id: number;
-  question: string;
-  title: string;
-  rotate: string;
-  fill: string;
-  transform: string;
-}
-
 interface Category {
   category: string;
   id: number;
   survey: number;
 }
-
 interface Prompt {
   prompt: string;
   id: number;
@@ -23,48 +12,38 @@ interface Prompt {
   fill: string;
   transform: string;
 }
-
-interface PromptsProps {
-
-  slices: Slice[];
-  selectScore: (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
-  add?: number;
-}
-
 interface State {
   categories: Category[];
   prompts: Prompt[];
-  slices: Slice[];
-  
+}
+
+interface PromptsProps {
+  state: State;
+  selectScore: Function;
+  add: number;
 }
 
 function Prompts({
-  slices,
+  state,
   selectScore,
-  add = 0,
+  add,
+  
 }: PromptsProps) {
-  console.log("Received props:", { slices, add });
+  console.log("Received props:", { state, add });
 
-  const categories = [{category: "SELF-AWARENESS", id: 0, survey: 5},{category: "SELF-MANAGEMENT", id: 1, survey: 5}]
 
-  const prompts =  [{prompt: "1", id: 0, category: "1", fill: "#9245FF", transform: "0.01",},
-    {prompt: "I can consistently identify and name my emotions in the moment.", id: 1, category: 0, fill: "#9245FF", transform: "0.01",}, 
-    {prompt: "I use self-reflection to understand the factors that contribute to my emotions and how my emotions impact me.", id: 2, category: 9, fill: "#9245FF", transform: "0.01",}, 
-    {prompt: "4", id: 3, category: 1, fill: "#9245FF", transform: "0.01",}, 
-    {prompt: "5", id: 4, category: 1, fill: "#9245FF", transform: "0.01",}, 
-    {prompt: "6", id: 5, category: 1, fill: "#9245FF", transform: "0.01",}]
-
-  const questions = categories.map((category) => (
+  
+  const questions = state.categories.map((category) => (
     <div key={category.id}>
       <div className="title" style={{ color: "grey" }}>{category.category}</div>
-      {prompts
+      {state.prompts
         .filter(prompt => prompt.category === category.id) // Filter prompts based on category
         .map(prompt => (
           <div key={prompt.id}>
             <p>{prompt.prompt}</p>
             <div className="Answer">
           <input
-            onChange={selectScore(prompt.id + add)} // Invoke the selectScore function
+            onChange={selectScore(prompt.id)} // Invoke the selectScore function
             type="range"
             min="1"
             max="100"

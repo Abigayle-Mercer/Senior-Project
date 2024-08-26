@@ -1,16 +1,33 @@
 import React from 'react';
-import { VictoryPie, VictoryTooltip } from 'victory';
+import { VictoryPie, VictoryTooltip, VictoryStack } from 'victory';
 
-// Define the type for datum based on your data structure
-interface CustomDatum {
-  value: number;
-  category: number;
+interface Category {
+  category: string;
+  id: number;
+  survey: number;
+}
+interface Prompt {
   prompt: string;
-  y: number;
-  gradientId: string; // Add a gradient ID property
+  id: number;
+  category: number;
+  fill: string;
+  transform: string;
+}
+interface State {
+  categories: Category[];
+  prompts: Prompt[];
+}
+interface PieProps {
+  state: State;
 }
 
-const PieChart: React.FC = () => {
+function PieChart({
+    state,
+   
+    
+  }: PieProps) {
+    console.log("Received props:", { state });
+
    const containerWidth = 600;
   const containerHeight = 600;
 
@@ -23,43 +40,9 @@ const PieChart: React.FC = () => {
 
   const getGradientId = (index: number) => `gradient-${index}`;
 
-  const data: CustomDatum[] = [
-    {y: 1, value: 8, category: 1, prompt:"I apply problem-solving techniques to situations in my life.", gradientId: getGradientId(0)},   
-    {y: 1, value: 8, category: 1, prompt: "When I face a difficult decision, I use a decision-making process to help me make the best decision. ", gradientId: getGradientId(1)}, 
-    {y: 1, value: 8, category: 1, prompt: "prompt 3", gradientId: getGradientId(2)},   
-    {y: 1, value: 8, category: 1, prompt: "prompt 4", gradientId: getGradientId(3)},   
-    {y: 1, value: 8, category: 2, prompt: "prompt 5", gradientId: getGradientId(4)}, 
-    {y: 1, value: 8, category: 2, prompt: "prompt 6", gradientId: getGradientId(5)}, 
-    {y: 1, value: 8, category: 2, prompt: "prompt 7", gradientId: getGradientId(6)},   
-    {y: 1, value: 8, category: 2, prompt: "prompt 8", gradientId: getGradientId(7)}, 
-    {y: 1, value: 8, category: 3, prompt: "prompt 9", gradientId: getGradientId(8)},   
-    {y: 1, value: 8, category: 3, prompt: "prompt 10", gradientId: getGradientId(9)},   
-    {y: 1, value: 8, category: 3, prompt: "prompt 11", gradientId: getGradientId(10)},
-    {y: 1, value: 8, category: 3, prompt: "prompt 12", gradientId: getGradientId(11)},   
-    {y: 1, value: 8, category: 4, prompt: "prompt 1", gradientId: getGradientId(12)},   
-    {y: 1, value: 8, category: 4, prompt: "prompt 2", gradientId: getGradientId(13)}, 
-    {y: 1, value: 8, category: 4, prompt: "prompt 3", gradientId: getGradientId(14)},   
-    {y: 1, value: 8, category: 4, prompt: "prompt 4", gradientId: getGradientId(15)},   
-    {y: 1, value: 8, category: 5, prompt: "prompt 5", gradientId: getGradientId(16)}, 
-    {y: 1, value: 8, category: 5, prompt: "prompt 6", gradientId: getGradientId(17)}, 
-    {y: 1, value: 8, category: 5, prompt: "prompt 7", gradientId: getGradientId(18)},   
-    {y: 1, value: 8, category: 5, prompt: "prompt 8", gradientId: getGradientId(19)}, 
-    {y: 1, value: 8, category: 6, prompt: "prompt 9", gradientId: getGradientId(20)},   
-    {y: 1, value: 8, category: 6, prompt: "prompt 10", gradientId: getGradientId(21)},   
-    {y: 1, value: 8, category: 6, prompt: "prompt 11", gradientId: getGradientId(22)},
-    {y: 1, value: 8, category: 6, prompt: "prompt 12", gradientId: getGradientId(23)}, 
-  ];
 
-  const categoryData = [
-    { x: "Category 1", y: 8 * 4 }, // 4 prompts in category 1
-    { x: "Category 2", y: 8 * 4 }, // 4 prompts in category 2
-    { x: "Category 3", y: 8 * 4 }, // 4 prompts in category 3
-    { x: "Category 4", y: 8 * 4 }, // 4 prompts in category 3
-    { x: "Category 5", y: 8 * 4 }, // 4 prompts in category 3
-    { x: "Category 6", y: 8 * 4 }, // 4 prompts in category 3
 
-    // Add categories with their corresponding prompt counts
-  ];
+  
 
   // Function to calculate cx and cy values
   const calculateCValues = (index: number) => {
@@ -76,15 +59,17 @@ const PieChart: React.FC = () => {
   };
 
   // Generate radial gradient definitions
-  const gradients = data.map((datum, index) => {
+  const gradients = state.prompts.map((datum, index) => {
     const [cx, cy] = calculateCValues(index);
     return (
-      <radialGradient key={index} id={datum.gradientId} cx={cx.toString()} cy={cy.toString()} r="120%">
+      <radialGradient key={index} id={getGradientId(datum.id)} cx={cx.toString()} cy={cy.toString()} r="120%">
         <stop offset="0%" stopColor="white" />
-        <stop offset="100%" stopColor={colorScale[datum.category % colorScale.length]} />
+        <stop offset="100%" stopColor={datum.fill} />
       </radialGradient>
     );
   });
+
+  
 
   return (
     <div>
@@ -93,15 +78,18 @@ const PieChart: React.FC = () => {
           {gradients}
         </defs>
       </svg>
+      <VictoryStack height={500} width={800}>
+    
+     
       <VictoryPie
      
-     width={1200}
-        radius={({ datum }) => 20 + datum.value * 20}
-        data={data}
+    
+        radius={({ datum }) => 20 + Math.round(parseFloat(datum.transform) * 9) * 20}
+        data={state.prompts}
         labels={({ datum }) => `${datum.prompt}`}
         style={{ 
           data: { 
-            fill: ({ datum }: { datum: CustomDatum }) => `url(#${datum.gradientId})`,
+            fill: ({ datum }: { datum: Prompt }) => `url(#${getGradientId(datum.id)})`,
             stroke: "white",
             strokeWidth: 0.2
           } 
@@ -113,6 +101,21 @@ const PieChart: React.FC = () => {
           />
         }
       />
+       <VictoryPie
+        data={state.categories}
+        
+       
+        radius={199} // Adjust the radius for the outer wheel
+        style={{
+          data: {
+            fill: "#EFEFEF",
+            stroke: "white",
+            strokeWidth: 1.5
+            
+          }
+        }}
+      />
+      </VictoryStack>
     </div>
   );
 };

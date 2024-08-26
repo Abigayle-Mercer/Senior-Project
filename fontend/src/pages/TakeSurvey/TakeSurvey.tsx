@@ -3,246 +3,82 @@ import { useLocation } from "react-router-dom";
 import Prompts from "../../components/Prompts/Prompts"
 import "./TakeSurvey.css";
 import PieChart2 from "../../components/PieChart/PieChart2";
+import PieChart from "../../components/PieChart/PieChart";
 
-interface Slice {
-    id: number;
-    question: string;
-    title: string;
-    rotate: string;
-    fill: string;
-    transform: string;
-  }
-
-  interface Category {
-    category: string;
-    id: number;
-    survey: number;
-  }
-  
-  interface Prompt {
-    prompt: string;
-    id: number;
-    category: number;
-    fill: string;
-    transform: string;
-  }
-  
-  
-  interface State {
-    categories: Category[];
-    prompts: Prompt[];
-    slices: Slice[];
-    
-  }
+interface Category {
+  category: string;
+  id: number;
+  survey: number;
+}
+interface Prompt {
+  prompt: string;
+  id: number;
+  category: number;
+  fill: string;
+  transform: string;
+}
+interface State {
+  categories: Category[];
+  prompts: Prompt[];
+}
 
 function TakeSurvey() {
 
     
     
-    const [state, setState] = useState({
-      categories: [{category: "1", id: 0, survey: 5},{category: "2", id: 1, survey: 5}],
-      prompts: [{prompt: "1", id: 0, category: "1"},
-        {prompt: "I can consistently identify and name my emotions in the moment.", id: 1, category: 0, fill: "#9245FF", transform: "0.01",}, 
-        {prompt: "I use self-reflection to understand the factors that contribute to my emotions and how my emotions impact me.", id: 2, category: 1, fill: "#9245FF", transform: "0.01",}, 
-        {prompt: "4", id: 3, category: "2", fill: "#9245FF", transform: "0.01",}, 
-        {prompt: "5", id: 4, category: "2", fill: "#9245FF", transform: "0.01",}, 
-        {prompt: "6", id: 5, category: "2", fill: "#9245FF", transform: "0.01",}],
-        slices: [
-          {
-            id: 1,
-            question:
-              "I can consistently identify and name my emotions in the moment.",
-            title: "SELF-AWARENESS",
-            rotate: "rotate(46.0000, 220, 220)",
-            fill: "#9245FF",
-            transform: "0.01",
-          },
-          {
-            id: 2,
-            question:
-              "I use self-reflection to understand the factors that contribute to my emotions and how my emotions impact me.",
-            title: "",
-            rotate: "rotate(64.0000, 220, 220)",
-            fill: "#9245FF",
-            transform: "0.01",
-          },
-          {
-            id: 3,
-            question:
-              "I consistently recognize and reflect on ways in which my identity is shaped by other people and my race, culture, experiences and environment.",
-            title: "",
-            rotate: "rotate(82.0000, 220, 220)",
-            fill: "#9245FF",
-            transform: "0.01",
-          },
-          {
-            id: 4,
-            question:
-              "I recognize and reflect on ways in which my identity shapes my views, biases, and prejudices.",
-            title: "",
-            rotate: "rotate(100.0000, 220, 220)",
-            fill: "#9245FF",
-            transform: "0.01",
-          },
-          {
-            id: 5,
-            question:
-              "I consistently find ways to manage strong emotions in ways that don’t negatively impact others.",
-            title: "SELF-MANAGEMENT",
-            rotate: "rotate(118.0000, 220, 220)",
-            fill: "#357AFF",
-            transform: "0.01",
-          },
-          {
-            id: 6,
-            question: "I can calm myself when I feel stressed or nervous.",
-            title: "",
-            rotate: "rotate(136.0000, 220, 220)",
-            fill: "#357AFF",
-            transform: "0.01",
-          },
-          {
-            id: 7,
-            question:
-              "I set measurable, challenging, and attainable goals and have clear steps in place to reach them.",
-            title: "",
-            rotate: "rotate(154.0000, 220, 220)",
-            fill: "#357AFF",
-            transform: "0.01",
-          },
-          {
-            id: 8,
-            question: "I balance my work life with personal renewal time.",
-            title: "",
-            rotate: "rotate(172.0000, 220, 220)",
-            fill: "#357AFF",
-            transform: "0.01",
-          },
-          {
-            id: 9,
-            question:
-              "I can grasp a person's perspective and feelings from both verbal and nonverbal cues.",
-            title: "SOCIAL AWARENESS",
-            rotate: "rotate(190.0000, 220, 220)",
-            fill: "#00A9B5",
-            transform: "0.01",
-          },
-          {
-            id: 10,
-            question:
-              "I pay attention to the feelings of others and recognize how my words and behavior impact them.",
-            title: "",
-            rotate: "rotate(208.0000, 220, 220)",
-            fill: "#00A9B5",
-            transform: "0.01",
-          },
-          {
-            id: 11,
-            question:
-              "I show care for others when I see that they have been harmed in some way.",
-            title: "",
-            rotate: "rotate(226.0000, 220, 220)",
-            fill: "#00A9B5",
-            transform: "0.01",
-          },
-          {
-            id: 12,
-            question: "I learn from those who have different opinions than me.",
-            title: "",
-            rotate: "rotate(244.0000, 220, 220)",
-            fill: "#00A9B5",
-            transform: "0.01",
-          },
-          {
-            id: 13,
-            question:
-              "I stay focused when listening to others and carefully consider their meaning.",
-            title: "RELATIONSHIP SKILLS",
-            rotate: "rotate(262.0000, 220, 220)",
-            fill: "#FF5C00",
-            transform: "0.01",
-          },
-          {
-            id: 14,
-            question:
-              "When I am upset with someone, I talk to them about how I feel and listen to their perspective.",
-            title: "",
-            rotate: "rotate(280.0000, 220, 220)",
-            fill: "#FF5C00",
-            transform: "0.01",
-          },
-          {
-            id: 15,
-            question:
-              "I openly admit my mistakes to myself and others and work to make things right.",
-            title: "",
-            rotate: "rotate(298.0000, 220, 220)",
-            fill: "#FF5C00",
-            transform: "0.01",
-          },
-          {
-            id: 16,
-            question:
-              "I can work through my discomfort when dealing with conflict, listen to feelings from all parties, and help them understand different perspectives.",
-            title: "",
-            rotate: "rotate(316.0000, 220, 220)",
-            fill: "#FF5C00",
-            transform: "0.01",
-          },
-          {
-            id: 17,
-            question:
-              "I involve others who are impacted to explore a problem collaboratively before choosing a solution or launching a new project.",
-            title: "RESPONSIBLE DECISION MAKING",
-            rotate: "rotate(334.0000, 220, 220)",
-            fill: "#E5AC00",
-            transform: "0.01",
-          },
-          {
-            id: 18,
-            question: "I find practical and respectful ways to overcome difficulty, even when it comes to making decisions that may not be popular.",
-            title: "",
-            rotate: "rotate(352.0000, 220, 220)",
-            fill: "#E5AC00",
-            transform: "0.01",
-          },
-          {
-            id: 19,
-            question: "I consider how my choices will be viewed through the lens of the young people I serve and the community around them.",
-            title: "",
-            rotate: "rotate(370.0000, 220, 220)",
-            fill: "#E5AC00",
-            transform: "0.01",
-          },
-          {
-            id: 20,
-            question: "I take time for self reflection and group reflection on progress toward goals and the process used.",
-            title: "",
-            rotate: "rotate(388.0000, 220, 220)",
-            fill: "#E5AC00",
-            transform: "0.01",
-          },
-        ],
-      });
-    
+  const [state, setState] = useState({
+    categories: [{ category: "Category 1", y: 8 * 4, id: 1, survey: 5 }, // 4 prompts in category 1
+                  { category: "Category 2", y: 8 * 4, id: 2, survey: 5}, // 4 prompts in category 2
+                  { category: "Category 3", y: 8 * 4, id: 3, survey: 5}, // 4 prompts in category 3
+                  { category: "Category 4", y: 8 * 4, id: 4, survey: 5}, // 4 prompts in category 3
+                  { category: "Category 5", y: 8 * 4, id: 5, survey: 5}, // 4 prompts in category 3
+                  { category: "Category 6", y: 8 * 4, id: 6, survey: 5}], // 4 prompts in category 3],
+    prompts: [
+      {id: 0, y: 1, category: 1, prompt:"Promp 1", fill: "#00A9B5", transform: "0.01" },   
+      {id: 1, y: 1, category: 1, prompt: "Prompt 2", fill: "#00A9B5", transform: "0.01" }, 
+      {id: 2, y: 1, category: 1, prompt: "prompt 3", fill: "#00A9B5", transform: "0.01" ,},   
+      {id: 3, y: 1, category: 1, prompt: "prompt 4", fill: "#00A9B5", transform: "0.01" },   
+      {id: 4, y: 1, category: 2, prompt: "prompt 5", fill: "#357AFF", transform: "0.01" }, 
+      {id: 5, y: 1, category: 2, prompt: "prompt 6", fill: "#357AFF", transform: "0.01" }, 
+      {id: 6, y: 1, category: 2, prompt: "prompt 7", fill: "#357AFF", transform: "0.01" },   
+      {id: 7, y: 1, category: 2, prompt: "prompt 8", fill: "#357AFF", transform: "0.01" }, 
+      {id: 8, y: 1, category: 3, prompt: "prompt 9", fill: "#9245FF", transform: "0.01" },   
+      {id: 9, y: 1, category: 3, prompt: "prompt 10", fill: "#9245FF", transform: "0.01" },   
+      {id: 10, y: 1, category: 3, prompt: "prompt 11", fill: "#9245FF", transform: "0.01" },
+      {id: 11, y: 1, category: 3, prompt: "prompt 12", fill: "#9245FF", transform: "0.01" },   
+      {id: 12, y: 1, category: 4, prompt: "prompt 13", fill: "#FF5C00", transform: "0.01" },   
+      {id: 13, y: 1, category: 4, prompt: "prompt 14", fill: "#FF5C00", transform: "0.01" }, 
+      {id: 14, y: 1, category: 4, prompt: "prompt 15", fill: "#FF5C00", transform: "0.01" },   
+      {id: 15, y: 1, category: 4, prompt: "prompt 16", fill: "#FF5C00", transform: "0.01" },   
+      {id: 16, y: 1, category: 5, prompt: "prompt 17", fill: "#FF234B", transform: "0.01" }, 
+      {id: 17, y: 1, category: 5, prompt: "prompt 18", fill: "#FF234B", transform: "0.01" }, 
+      {id: 18, y: 1, category: 5, prompt: "prompt 19", fill: "#FF234B", transform: "0.01" },   
+      {id: 19, y: 1, category: 5, prompt: "prompt 20", fill: "#FF234B", transform: "0.01" }, 
+      {id: 20, y: 1, category: 6, prompt: "prompt 21", fill: "#E5AC00", transform: "0.01" },   
+      {id: 21, y: 1, category: 6, prompt: "prompt 22", fill: "#E5AC00", transform: "0.01" },   
+      {id: 22, y: 1, category: 6, prompt: "prompt 23", fill: "#E5AC00", transform: "0.01" },
+      {id: 23, y: 1, category: 6, prompt: "prompt 24", fill: "#E5AC00", transform: "0.01" }, 
+    ],
+  });
+
+
   const location = useLocation();
   const survey = location.state?.survey;
   const [start, setStart] = useState(false);
   const [prompts, setPrompts] = useState(false)
   const [wheel, setWheel] = useState(false);
 
+  
+
   const selectScore = (questionIndex: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("HERE")
     let targetValue = parseInt(e.target.value) / 100;
     if (targetValue === 1) {
       targetValue = 1.0;
     }
     const newState = { ...state };
-    newState.slices[questionIndex].transform = targetValue.toString();
+    newState.prompts[questionIndex].transform = targetValue.toString();
     setState(newState);
   };
-
- 
 
 
   if (!survey) {
@@ -265,19 +101,18 @@ function TakeSurvey() {
         {
             prompts && (
                 <div className="survey-content"> 
-                <Prompts
-                  
-                  slices={state.slices}
-                  selectScore={selectScore}
-                />                    
+                <Prompts state={state} selectScore={selectScore} add={1} />                
                 <button className="wheel-button" onClick={() => {setPrompts(false); setWheel(true)}}>Go To Wheel</button>
                 </div>
             )
         }
         {
             wheel && (
-                <div> 
-                    <PieChart2 />
+                <div > 
+                     
+                    <PieChart state={state}  />
+                    <button className="wheel-button" onClick={() => {setPrompts(true); setWheel(false)}}>Back To Prompts</button>
+
 
                 </div>
             )
