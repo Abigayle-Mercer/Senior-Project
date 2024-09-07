@@ -13,7 +13,7 @@ const Search: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const surveyBank: Survey[] = [
-    { title: "Student Engagement Survey", description: "A survey aimed at measuring the level of student engagement during class activities.", author: "John Doe" },
+    { title: "Student Engagement ", description: "A survey aimed at measuring the level of student engagement during class activities.", author: "John Doe" },
     { title: "Teacher Feedback Survey", description: "This survey collects anonymous feedback from students about their instructor's teaching methods.", author: "Jane Smith" },
     { title: "Course Evaluation Survey", description: "A comprehensive survey evaluating the effectiveness of the course curriculum.", author: "Emily Johnson" },
     { title: "Remote Learning Experience Survey", description: "This survey gathers information on the challenges and benefits of remote learning.", author: "David Williams" },
@@ -98,9 +98,12 @@ return (
               {filteredSurveys.map((survey, index) => (
             
                 <div key={index} className="survey-result">
-                  <h3>{survey.title}</h3>
+                  <div className="left-info"> 
+                    <h3>{survey.title}</h3>
+                    <small>Author: {survey.author}</small>
+                  </div>
+                
                   <p>{survey.description}</p>
-                  <small>Author: {survey.author}</small>
                 </div>
               ))}
               </div>
