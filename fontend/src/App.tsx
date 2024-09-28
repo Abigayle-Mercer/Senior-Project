@@ -1,21 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage, LoginPage, SignupPage, StudentDashBoard, TeacherDashBoard, PreviousResponses, MakeSurveys, StatsPage, FindSurveys, TakeSurvey } from "./pages/pages";
 import React, { useState } from "react";
-import { AuthProvider } from "./components/useAuth/useAuth";
+import { AuthProvider, useAuth } from "./components/useAuth/useAuth";
 import { ProtectedRoute } from "./components/ProtectedRoute/ProtectedRoute";
 import Layout from './components/Layout/Layout';
-
-
-
 import "../defined.js";
-
 import "./App.css";
 import "./styles.css";
 
 
 
 function App() {
-
+  
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
@@ -26,7 +22,9 @@ function App() {
 interface Credentials {
   username: string;
   pwd: string;
-  isTeacher?: boolean; // Flag to differentiate between student and teacher
+  name: string;
+  district: string;
+  isTeacher: boolean; // Flag to differentiate between student and teacher
 }
 
 
@@ -40,9 +38,23 @@ interface Credentials {
   });
   */
 
- async function loginUser(creds: Credentials): Promise<boolean> {
+  interface User {
+    // Define your user interface here
+    email: string;
+    token: string;
+    isTeacher: boolean;
+    
+  }
+  
+
+ async function loginUser(creds: Credentials, login: (data: User) => void): Promise<boolean> {
+ 
+  console.log("IS TEACHER: ", creds.isTeacher);
    try {
-     const response = await fetch(`${API_PREFIX}/login`, {
+    const endpoint = creds.isTeacher
+       ? `${API_PREFIX}/login/teacher`
+       : `${API_PREFIX}/login/student`;
+     const response = await fetch(endpoint, {
        method: "POST",
        headers: {
          "Content-Type": "application/json",
@@ -54,6 +66,10 @@ interface Credentials {
        const payload = await response.json();
        setToken(payload.token);
        setMessage("Login successful; auth token saved");
+       console.log(token)
+       const email = creds.username;
+       const isTeacher = creds.isTeacher
+       login({ email, token, isTeacher,  });
        return true;
      } else {
        const data = await response.json();
@@ -67,6 +83,7 @@ interface Credentials {
  }
 
  async function signupUser(creds: Credentials): Promise<boolean> {
+  console.log("Teacher ? : ", creds.isTeacher)
    try {
      const endpoint = creds.isTeacher
        ? `${API_PREFIX}/signup/teacher`
@@ -109,20 +126,20 @@ interface Credentials {
             </Route>
             <Route
               path="/Login-Teacher"
-              element={<LoginPage user={"Teacher"} handleSubmit={loginUser} />}
+              element={<LoginPage user={"Teacher"} isTeacher={true} handleSubmit={loginUser} />}
             >
               {" "}
             </Route>
             <Route
               path="/Login-Student"
-              element={<LoginPage user={"Student"} handleSubmit={loginUser} />}
+              element={<LoginPage user={"Student"} isTeacher={false} handleSubmit={loginUser} />}
             >
               {" "}
             </Route>
             <Route
               path="/Signup-Student"
               element={
-                <SignupPage user={"Student"} handleSubmit={signupUser} />
+                <SignupPage user={"Student"} isTeacher={false} handleSubmit={signupUser} />
               }
             >
               {" "}
@@ -130,7 +147,7 @@ interface Credentials {
             <Route
               path="/Signup-Teacher"
               element={
-                <SignupPage user={"Teacher"} handleSubmit={signupUser} />
+                <SignupPage user={"Teacher"}  isTeacher={true} handleSubmit={signupUser} />
               }
             >
               {" "}

@@ -81,7 +81,7 @@ function PreviousResponses() {
       case 'prompts':
         return <Prompts state={state} selectScore={selectScore} add={1} />;
       case 'wheel':
-        return <PieChart state={state}  />; // Replace with <Wheel /> component
+        return <PieChart state={state}  />; 
       case 'reflections':
         return <ReflectionTextBox />
       default:

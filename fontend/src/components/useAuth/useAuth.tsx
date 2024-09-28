@@ -5,6 +5,7 @@ import { useLocalStorage } from "../useLocalStorage/useLocalStorage";
 interface User {
   // Define your user interface here
   email: string;
+  token: string;
   isTeacher: boolean;
   
 }

@@ -31,7 +31,10 @@ import {reflectionResponseRoutes} from "./routes/reflectionResponse.js";
 import {studentRoutes} from "./routes/student.js";
 
 import {
-  registerUser,
+  registerStudent,
+  registerTeacher,
+  loginStudent,
+  loginTeacher,
   loginUser,
 
 } from "./auth.js";
@@ -62,9 +65,11 @@ app.use("/api/students", studentRoutes);
 app.use("/api/classes", classRoutes);
 
 // Authentication
-app.post("/signup/student", registerUser); 
-app.post("/signup/teacher", registerUser); 
-app.post("/login", loginUser);
+app.post("/signup/student", registerStudent); 
+app.post("/signup/teacher", registerTeacher); 
+app.post("/login/teacher", loginTeacher);
+app.post("/login/student", loginStudent);
+
 
 
 // connect to DB

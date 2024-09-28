@@ -8,22 +8,29 @@ interface Props {
   buttonLabel?: string;
   handleSubmit: (creds: Credentials) => Promise<boolean>;
   user: string;
+  isTeacher: boolean;
 }
 
 interface Credentials {
   username: string;
   pwd: string;
-  isTeacher?: boolean;
+  name: string;
+  district: string;
+  isTeacher: boolean; // Flag to differentiate between student and teacher
+
 }
 
+
+interface User {
+  email: string;
+  token: string;
+  isTeacher: boolean;
+}
 const LoginPage: React.FC<Props> = (props) => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [isTeacher, setIsTeacher] = useState(false);
+ 
 
-  if (props.user === "Teacher" && !isTeacher) {
-    setIsTeacher(true);
-    }
  
   const handleSwitchToSignUp = () => {
     if (props.user === "Teacher") {
@@ -37,7 +44,9 @@ const LoginPage: React.FC<Props> = (props) => {
   const [creds, setCreds] = useState<Credentials>({
     username: "",
     pwd: "",
-    isTeacher: isTeacher, // ask if there needs to be a question mark here 
+    name: "",
+    district: "",
+    isTeacher: props.isTeacher, // ask if there needs to be a question mark here 
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,19 +58,23 @@ const LoginPage: React.FC<Props> = (props) => {
   };
 
   const submitForm = () => {
-    props.handleSubmit(creds).then(
+    setCreds((prevCreds) => ({
+      ...prevCreds,
+      isTeacher: props.isTeacher,
+    }));
+
+    console.log("IS TEACHER: ", creds)
+    props.handleSubmit(creds, login).then(
       async function retreiveSuccess(bool: boolean) {
         if (bool) {
           if (props.user === "Teacher") {
-            console.log("HIIIII")
+            console.log("navigating to teacher dashboard")
             navigate("/TeacherDashBoard");
-            const email = creds.username;
-            await login({ email, isTeacher });
-
+            
           } else {
+            console.log("navigating to student dashboard")
             navigate("/StudentDashBoard");
-            const email = creds.username;
-            await login({ email, isTeacher });
+            
 
           }
         
@@ -70,7 +83,7 @@ const LoginPage: React.FC<Props> = (props) => {
       // navigate(/dashboard )
     );
 
-    setCreds({ username: "", pwd: "" });
+    setCreds({ username: "", name: "", district: "", pwd: "", isTeacher: props.isTeacher });
   };
 
   

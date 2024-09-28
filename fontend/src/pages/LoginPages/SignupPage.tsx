@@ -5,17 +5,18 @@ import "./login.css";
 interface Props {
   buttonLabel?: string;
   handleSubmit: (creds: Credentials) => Promise<boolean>;
+  isTeacher: boolean;
   user: string,
 }
 
 interface Credentials {
   username: string;
   pwd: string;
-  isTeacher?: boolean;
+  name: string;
+  district: string;
+  isTeacher: boolean; // Flag to differentiate between student and teacher
 }
 const SignupPage: React.FC<Props> = (props) => {
-  const [name, setName] = useState("");
-  const [district, setDistrict] = useState("");
   const [isTeacher, setIsTeacher] = useState(false);
 
 
@@ -23,6 +24,8 @@ const SignupPage: React.FC<Props> = (props) => {
   
 
    if (props.user === "Teacher" && !isTeacher) {
+    console.log(props.user)
+    console.log("HELLA? ")
      setIsTeacher(true);
    }
 
@@ -37,6 +40,8 @@ const SignupPage: React.FC<Props> = (props) => {
    const [creds, setCreds] = useState<Credentials>({
      username: "",
      pwd: "",
+     district: "",
+     name: "",
      isTeacher: isTeacher, // ask if there needs to be a question mark here
    });
 
@@ -46,7 +51,10 @@ const SignupPage: React.FC<Props> = (props) => {
     setCreds((prevCreds) => ({
       ...prevCreds,
       [name]: value,
+      isTeacher: isTeacher,
     }));
+    console.log(creds)
+    
   };
 
   const submitForm = () => {
@@ -56,15 +64,15 @@ const SignupPage: React.FC<Props> = (props) => {
           if (isTeacher) {
             navigate("/Login-Teacher");
           } else {
-
+            navigate("/Login-Student"); 
           }
-          navigate("/Login-Student");
+          
         }
       }
       // navigate(/dashboard )
     );
 
-    setCreds({ username: "", pwd: "" });
+    setCreds({ username: "", pwd: "", name: "", district: "", isTeacher: props.isTeacher });
   };
 
 
@@ -76,16 +84,20 @@ const SignupPage: React.FC<Props> = (props) => {
           <label>Name:</label>
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="name"
+            name="name"
+            value={creds.name}
+            onChange={handleChange}
           />
         </div>
         <div className="input-group">
           <label>School District:</label>
           <input
             type="text"
-            value={district}
-            onChange={(e) => setDistrict(e.target.value)}
+            id="district"
+            name="district"
+            value={creds.district}
+            onChange={handleChange}
           />
         </div>
         <div className="input-group">

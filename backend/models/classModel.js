@@ -2,16 +2,16 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-const categorySchema = new Schema(
+const classSchema = new Schema(
   {
     title: {
       type: String,
       required: true,
     },
-    surveyId: {
+    adminId: {
       type: String,
     },
   },
   { timestamps: true }
 );
-export default mongoose.model("Category", categorySchema);
+export default mongoose.model("Class", classSchema);

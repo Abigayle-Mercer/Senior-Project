@@ -14,8 +14,10 @@ Backend:
     - get previous survey
     - assign new survey
     - like survey
-    - can't login as a student with teach creds and vice versa 
-    - when sigining up should create the appropriate related objects
+
+BUGS: 
+    - need to fix arrows sliding on previous prompts
+    - need to fix pie placement on previous pie chart 
 
 not sure: 
 - verify emails for users upon login

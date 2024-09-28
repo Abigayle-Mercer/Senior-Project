@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MakeSurveys.css";
+import { useAuth } from "../../components/useAuth/useAuth";
+import {createSurvey, createPrompt, createCategory} from "../../services/services";
+
 
 interface Field {
   label: string;
@@ -14,7 +17,9 @@ interface FormData {
 }
 
 const FormSubmission: React.FC = () => {
+  const API_PREFIX = "http://localhost:4000";
 
+  const { user } = useAuth();  // Get user info from AuthProvider
   const [formData, setFormData] = useState<FormData>({
     title: "",
     fields: [{ label: "", values: [""] }],
@@ -59,15 +64,43 @@ const FormSubmission: React.FC = () => {
     setFormData({ ...formData, fields: newFields });
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
+  
+
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Form submitted:");
-    console.log("Title:", formData.title);
-    formData.fields.forEach((field) => {
-      console.log("Label:", field.label);
-      console.log("Values:", field.values);
-    });
+
+    if (!user) {
+      console.error("No user is logged in");
+      return;
+    }
+
+    const token = user.token;
+
+    try {
+      // First, create the survey
+      const surveyData = await createSurvey(token, formData.title, user.email);
+      const surveyId = surveyData._id;
+
+      // Create each category and its prompts
+      for (const field of formData.fields) {
+        const categoryData = await createCategory(token, surveyId, field.label);
+        const categoryId = categoryData._id;
+
+        // Post each value as a prompt
+        for (const value of field.values) {
+          await createPrompt(token, value, categoryId);
+        }
+      }
+
+      console.log("All data submitted successfully");
+
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
+  
 
     return (
       <div className="form-card">
